@@ -11,6 +11,7 @@ import { createDrawerNavigator } from "@react-navigation/drawer";
 import { DrawerContent } from "../screens/drawerContent/drawerContent";
 import HomeScreen from "../screens/homeScreen/homeScreen";
 import FoodScreen from "../screens/foodScreen/foodScreen";
+import CourierScreen from '../screens/courierScreen/courierScreen';
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 const Routes = () => {
@@ -43,6 +44,7 @@ const Routes = () => {
      >
        <Drawer.Screen name="HomeScreen" component={HomeScreen} />
        <Drawer.Screen name="FoodScreen" component={FoodScreen} />
+       <Drawer.Screen name="CourierScreen" component={CourierScreen} />
      </Drawer.Navigator>
       }
     </NavigationContainer>
