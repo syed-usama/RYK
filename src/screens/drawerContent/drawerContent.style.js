@@ -1,4 +1,5 @@
-import {StyleSheet,Dimensions} from 'react-native';
+import {StyleSheet} from 'react-native';
+import colors from '../../assets/colors/colors';
 export default StyleSheet.create({
     drawerContent: {
         flex: 1,
@@ -7,16 +8,19 @@ export default StyleSheet.create({
       userInfoSection: {
           flex: 1,
         paddingLeft: 20,
-        backgroundColor: "darkorange",
+        backgroundColor: colors.primary,
       },
       title: {
         fontSize: 16,
         marginTop: 3,
         fontWeight: 'bold',
+        color: colors.white
       },
       caption: {
         fontSize: 14,
         lineHeight: 14,
+        marginBottom:10,
+        color: colors.white
       },
       row: {
         marginTop: 20,

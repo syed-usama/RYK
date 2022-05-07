@@ -13,6 +13,7 @@ import Iconn from 'react-native-vector-icons/Ionicons';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import styles from './drawerContent.style';
 import { AuthContext } from '../../services/firebase/authProvider';
+import colors from '../../assets/colors/colors';
 
 export function DrawerContent(props) {
     const {user, login, register, logout} = useContext(AuthContext);
@@ -25,10 +26,12 @@ export function DrawerContent(props) {
                             <Icon 
                                 name="account-outline" 
                                 size={50}
+                                color={colors.white}
                             />
                             <View style={{flex:1, justifyContent:"flex-end"}}>
-                                <Title style={styles.title}> Mohsin Rehman</Title>
-                                <Caption style={styles.caption}>{user.email}</Caption>
+                                <Title style={styles.title}> @Username</Title>
+                                {user?.email ?<Caption style={styles.caption}>{user?.email}</Caption>:
+                                <Caption style={styles.caption}>user_email@gmail.com</Caption>}
                             </View>
                         </View>
                     </View>
@@ -55,6 +58,18 @@ export function DrawerContent(props) {
                                     />
                                 )}
                                 label="Profile"
+                                onPress={() => {props.navigation.navigate('CourierScreen')}}
+                            />
+                            <DrawerItem 
+                                icon={({color, size}) => (
+                                    <Icon 
+                                    name="truck-delivery-outline" 
+                                    color={color}
+                                    size={size}
+                                    />
+                                )}
+                                label="RYK Courier"
+                                onPress={() => {props.navigation.navigate('CourierScreen')}}
                             />
                             <DrawerItem 
                                 icon={({color, size}) => (
@@ -64,7 +79,7 @@ export function DrawerContent(props) {
                                     size={size}
                                     />
                                 )}
-                                label="Food"
+                                label="RYK Food"
                                 onPress={() => {props.navigation.navigate('FoodScreen')}}
                             />
                             <DrawerItem 
@@ -76,6 +91,7 @@ export function DrawerContent(props) {
                                     />
                                 )}
                                 label="Settings"
+                                onPress={() => {props.navigation.navigate('CourierScreen')}}
                             />
                             <DrawerItem 
                                 icon={({color, size}) => (
@@ -86,23 +102,25 @@ export function DrawerContent(props) {
                                     />
                                 )}
                                 label="Support"
+                                onPress={() => {props.navigation.navigate('CourierScreen')}}
                             />
                         </Drawer.Section>
                         </DrawerContentScrollView>
                     </View>
                 </View>
             </View>
-            <View style={{flex:1}}>
+            <View style={{flex:1,backgroundColor:colors.primary}}>
                 <Drawer.Section style={styles.bottomDrawerSection}>
                     <DrawerItem 
                         icon={({color, size}) => (
                             <Icon 
                             name="exit-to-app" 
-                            color={color}
+                            color={colors.white}
                             size={size}
                             />
                         )}
                         label="Sign Out"
+                        labelStyle={{color:colors.white}}
                         onPress={() => logout()}
                     />
                 </Drawer.Section>

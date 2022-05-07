@@ -1,54 +1,54 @@
 import React, { useContext, useEffect } from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, Dimensions,Image,  ScrollView, SafeAreaView} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import {AuthContext} from '../../services/firebase/authProvider';
-// import Icon from 'react-native-vector-icons/Ionicons';
-import {Image, Dimensions, ScrollView} from 'react-native';
+const {height} = Dimensions.get('screen');
+const height_logo = height + 200;
+import styles from './foodScreen.style';
+import colors from '../../assets/colors/colors';
 const FoodScreen = ({navigation}) => {
     const {user, login, register, logout} = useContext(AuthContext);
     useEffect(() => {
         console.log(user);
     },[])
   return (
-    <View style={styles.container}>
+    
+    <SafeAreaView style={styles.container}>
+      
       {/* <ImageBackground source={require('../assets/back3.jpg')} resizeMode="cover" style={styles.backimage}> */}
       <View
         style={{
-          flex: 0.6,
+          height:hp(5),
           flexDirection: 'row',
           paddingHorizontal: 15,
-          backgroundColor: 'rgba(0, 0, 0, 0.0)',
+          justifyContent:'space-between',
+          alignItems:'flex-end'
         }}>
-        <View
-          style={{
-            flex: 1,
-            justifyContent: 'flex-end',
-            alignItems: 'flex-start',
-          }}>
           <Icon
             name="bars"
-            size={25}
-            color="#900"
+            size={27}
+            color={colors.primary}
             onPress={() => navigation.openDrawer()}
           />
-        </View>
-        <View
-          style={{flex: 1, justifyContent: 'flex-end', alignItems: 'center'}}>
-          <Text style={styles.titleText}>Food</Text>
-        </View>
-        <View
-          style={{flex: 1, justifyContent: 'flex-end', alignItems: 'flex-end'}}>
-          <Icon name="search" size={25} color="#900" />
+          <Text style={styles.titleText}>RYK  Foodies</Text>
+          <MaterialCommunityIcons name="cart" size={25} color={colors.primary} />
+      </View>
+      
+      <View style={{height:hp(9)}}>
+        <View style={styles.searchView}>
+        <Icon name="search" size={22} color='grey' />
+          <Text style={styles.searchText}>Search for Resturant, Food Items</Text>
         </View>
       </View>
-
+      <ScrollView style={{height:height_logo}}>
       <View
         style={{
-          flex: 4,
+          height:hp(26),
           flexDirection: 'row',
-          backgroundColor: 'rgba(0, 0, 0, 0.1)',
         }}>
-        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+        <View style={{flex: 1, justifyContent: 'center',paddingLeft:20,elevation:5}}>
           <Image
             style={styles.image}
             resizeMode="stretch"
@@ -56,80 +56,60 @@ const FoodScreen = ({navigation}) => {
           />
         </View>
       </View>
-      <View style={{flex: 3, backgroundColor: 'rgba(0, 0, 0, 0.2)'}}>
-        <View style={{flex: 1, paddingLeft: 15}}>
-          <Text style={{fontSize: 20, fontWeight: '700'}}>Your Favourite</Text>
+      <View style={{height:hp(26)}}>
+        <View style={{flex: 1, paddingLeft: 20}}>
+          <Text style={{fontSize: 20, fontWeight: '700', color:colors.secondary,marginTop:5,}}>Your Favourite</Text>
         </View>
-        <View style={{flex: 4, flexDirection: 'row'}}>
+        <View style={{flex: 4, flexDirection: 'row',paddingLeft:10}}>
           <ScrollView horizontal={true}>
-            <View
-              style={{
-                width: 130,
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}>
+            <View style={styles.favourite}>
               <Image
-                style={{width: 100, height: 100, borderRadius: 50}}
+                style={styles.itemImage}
                 resizeMode="stretch"
                 source={require('../../assets/images/sandwich.jpeg')}
               />
-              <Text style={{fontSize: 12, fontWeight: '700'}}>Sandwich</Text>
-              <Text style={{fontSize: 12, fontWeight: '700'}}>Rs: 250</Text>
+              <Text style={styles.itemText}>Sandwich</Text>
+              <Text style={styles.itemText1}>Rs: 250</Text>
             </View>
-            <View
-              style={{
-                width: 130,
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}>
+            <View style={styles.favourite}>
               <Image
-                style={{width: 100, height: 100, borderRadius: 50}}
+                style={styles.itemImage}
                 resizeMode="stretch"
                 source={require('../../assets/images/burger.jpeg')}
               />
-              <Text style={{fontSize: 12, fontWeight: '700'}}>
+              <Text style={styles.itemText}>
                 Zinger Burger
               </Text>
-              <Text style={{fontSize: 12, fontWeight: '700'}}>Rs: 450</Text>
+              <Text style={styles.itemText1}>Rs: 450</Text>
             </View>
-            <View
-              style={{
-                width: 130,
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}>
+            <View style={styles.favourite}>
               <Image
-                style={{width: 100, height: 100, borderRadius: 50}}
+                style={styles.itemImage}
                 resizeMode="stretch"
                 source={require('../../assets/images/pancake.jpeg')}
               />
-              <Text style={{fontSize: 12, fontWeight: '700'}}>Pancake</Text>
-              <Text style={{fontSize: 12, fontWeight: '700'}}>Rs: 300</Text>
+              <Text style={styles.itemText}>Pancake</Text>
+              <Text style={styles.itemText1}>Rs: 300</Text>
             </View>
-            <View
-              style={{
-                width: 130,
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}>
+            <View style={styles.favourite}>
               <Image
-                style={{width: 100, height: 100, borderRadius: 50}}
+                style={styles.itemImage}
                 resizeMode="stretch"
                 source={require('../../assets/images/burger.jpeg')}
               />
-              <Text style={{fontSize: 12, fontWeight: '700'}}>
+              <Text style={styles.itemText}>
                 Zinger Burger
               </Text>
-              <Text style={{fontSize: 12, fontWeight: '700'}}>Rs: 450</Text>
+              <Text style={styles.itemText1}>Rs: 450</Text>
             </View>
           </ScrollView>
         </View>
       </View>
-      <View style={{flex: 4, backgroundColor: 'rgba(0, 0, 0, 0.3)'}}>
-        <View style={{flex: 1, paddingLeft: 15}}>
-          <Text style={{fontSize: 20, fontWeight: '700'}}>Restaurants</Text>
+      <View style={{height:hp(33)}}>
+        <View style={{flex: 1, paddingLeft: 20}}>
+          <Text style={{fontSize: 20, fontWeight: '700',color:colors.secondary,marginTop:7}}>Restaurants</Text>
         </View>
-        <View style={{flex: 5, flexDirection: 'row', paddingVertical: 10}}>
+        <View style={{flex: 5, flexDirection: 'row'}}>
           <ScrollView horizontal={true}>
             <View
               style={{
@@ -137,6 +117,8 @@ const FoodScreen = ({navigation}) => {
                 backgroundColor: 'white',
                 borderRadius: 15,
                 marginLeft: 15,
+                marginVertical:5,
+                elevation:5
               }}>
               <View style={{flex: 3}}>
                 <Image
@@ -150,8 +132,8 @@ const FoodScreen = ({navigation}) => {
                 />
               </View>
               <View style={{flex: 1, paddingLeft: 5}}>
-                <Text style={{fontSize: 16, fontWeight: '700'}}>BestCook</Text>
-                <Text style={{fontSize: 12}}>
+                <Text style={{fontSize: 16, fontWeight: '700',color:colors.secondary}}>BestCook</Text>
+                <Text style={{fontSize: 12,color:colors.secondary}}>
                   Bahria Town Phase 4 ,Islamabad
                 </Text>
               </View>
@@ -162,6 +144,8 @@ const FoodScreen = ({navigation}) => {
                 backgroundColor: 'white',
                 borderRadius: 15,
                 marginLeft: 10,
+                marginVertical:5,
+                elevation:5
               }}>
               <View style={{flex: 3}}>
                 <Image
@@ -175,8 +159,8 @@ const FoodScreen = ({navigation}) => {
                 />
               </View>
               <View style={{flex: 1, paddingLeft: 5}}>
-                <Text style={{fontSize: 16, fontWeight: '700'}}>WingsBy</Text>
-                <Text style={{fontSize: 12}}>
+                <Text style={{fontSize: 16, fontWeight: '700',color:colors.secondary}}>WingsBy</Text>
+                <Text style={{fontSize: 12,color:colors.secondary}}>
                   Bahria Town Phase 4 ,Islamabad
                 </Text>
               </View>
@@ -185,30 +169,10 @@ const FoodScreen = ({navigation}) => {
         </View>
       </View>
       {/* </ImageBackground> */}
-    </View>
+      <View style={{height:30}}></View>
+      </ScrollView>
+    </SafeAreaView>
   );
 };
 
 export default FoodScreen;
-const {height} = Dimensions.get('screen');
-const height_logo = height * 0.25;
-const width_logo = height * 0.38;
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: 'white',
-  },
-  titleText: {
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-  image: {
-    width: width_logo,
-    height: height_logo,
-    borderRadius: 6,
-  },
-  backimage: {
-    flex: 1,
-    justifyContent: 'center',
-  },
-});
