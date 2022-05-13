@@ -13,6 +13,9 @@ const HomeSwiper = ({navigation}) => {
         <Image style={styles.sliderImage} source={require('../../assets/images/slider_images/slide2.jpeg')}/>
       </View>
       <View style={styles.slide}>
+        <Image style={styles.sliderImage} source={require('../../assets/images/slider_images/slide5.jpg')}/>
+      </View>
+      <View style={styles.slide}>
         <Image style={styles.sliderImage} source={require('../../assets/images/slider_images/slide3.jpeg')}/>
       </View>
       <View style={styles.slide}>

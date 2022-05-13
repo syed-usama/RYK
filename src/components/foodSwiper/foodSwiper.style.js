@@ -7,7 +7,7 @@ export default StyleSheet.create({
     },
     sliderImage:{
         width:wp(95),
-        height:hp(26),
+        height:hp(23),
         resizeMode:'stretch',
         borderRadius:10
     }

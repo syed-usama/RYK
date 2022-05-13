@@ -14,7 +14,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import styles from './drawerContent.style';
 import { AuthContext } from '../../services/firebase/authProvider';
 import colors from '../../assets/colors/colors';
-
+  
 export function DrawerContent(props) {
     const {user, login, register, logout} = useContext(AuthContext);
     return(
@@ -81,6 +81,17 @@ export function DrawerContent(props) {
                                 )}
                                 label="RYK Food"
                                 onPress={() => {props.navigation.navigate('FoodScreen')}}
+                            />
+                            <DrawerItem 
+                                icon={({color, size}) => (
+                                    <Icon 
+                                    name="storefront" 
+                                    color={color}
+                                    size={size}
+                                    />
+                                )}
+                                label="RYK Store"
+                                onPress={() => {props.navigation.navigate('CourierScreen')}}
                             />
                             <DrawerItem 
                                 icon={({color, size}) => (

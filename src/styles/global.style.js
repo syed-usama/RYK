@@ -9,5 +9,27 @@ export default StyleSheet.create({
     width: wp('100%'),
     justifyContent: 'center',
     alignItems: 'center',
-  }
+  },
+  badgeIconView:{
+    position:'relative',
+    height:29,
+    justifyContent:'flex-end',
+  },
+  badgeView:{
+    backgroundColor: colors.primary,
+    borderRadius: 7,
+    alignItems:'center',
+    justifyContent:'center',
+    borderColor:'white',
+    borderWidth:1,
+    position:'absolute',
+    right:-1,
+    height:14,
+    width:14,
+    top:0
+  },
+  badge:{
+    color:'#fff',
+    fontSize:8,
+  },
 });
