@@ -4,10 +4,7 @@ import {
     Text, 
     TouchableOpacity, 
     TextInput,
-    Platform,
-    StyleSheet ,
     StatusBar,
-    Alert,
     ActivityIndicator,
     ToastAndroid
 } from 'react-native';
@@ -18,7 +15,6 @@ import Feather from 'react-native-vector-icons/Feather';
 import color from '../../assets/colors/colors';
 import styles from './loginScreen.style'
 import style from '../../styles/global.style';
-import { useTheme } from 'react-native-paper';
 import { AuthContext } from '../../services/firebase/authProvider';
 
 
@@ -34,8 +30,6 @@ const LoginScreen = ({navigation}) => {
         isValidUser: true,
         isValidPassword: true,
     });
-
-    const { colors } = useTheme();
 
 
     const textInputChange = (val) => {
@@ -121,7 +115,7 @@ const LoginScreen = ({navigation}) => {
         <Animatable.Image 
                 animation="bounceIn"
                 duraton="1500"
-            source={require('../../assets/images/ryklogo.png')}
+            source={require('../../assets/images/rykmall.png')}
             style={styles.logo}
             resizeMode="stretch"
             />
@@ -146,7 +140,6 @@ const LoginScreen = ({navigation}) => {
                     }]}
                     autoCapitalize="none"
                     onChangeText={(val) => textInputChange(val)}
-                    onEndEditing={(e)=>handleValidUser(e.nativeEvent.text)}
                 />
                 {data.check_textInputChange ? 
                 <Animatable.View

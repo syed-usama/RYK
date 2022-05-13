@@ -141,7 +141,7 @@ const SignupScreen = ({navigation}) => {
       <Animatable.Image 
                 animation="bounceIn"
                 duraton="1500"
-            source={require('../../assets/images/ryklogo.png')}
+            source={require('../../assets/images/rykmall.png')}
             style={styles.logo}
             resizeMode="stretch"
             />
@@ -214,7 +214,7 @@ const SignupScreen = ({navigation}) => {
               onChangeText={val => handleConfirmPasswordChange(val)}
             />
             <TouchableOpacity onPress={updateConfirmSecureTextEntry}>
-              {data.secureTextEntry ? (
+              {data.confirm_secureTextEntry ? (
                 <Feather name="eye-off" color={color.white} size={20} />
               ) : (
                 <Feather name="eye" color={color.white} size={20} />

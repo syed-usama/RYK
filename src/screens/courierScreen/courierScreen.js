@@ -18,7 +18,7 @@ const CourierScreen = ({navigation}) => {
             color={colors.primary}
             onPress={() => navigation.openDrawer()}
           />
-          <Text style={styles.titleText}>RYK Services</Text>
+          <Text style={styles.titleText}>RYK Mall</Text>
           <Icon name="search" size={25} color={colors.primary} />
       </View>
       <View style={{flex:0.8,justifyContent:'center'}}>

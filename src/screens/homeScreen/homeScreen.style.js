@@ -23,7 +23,7 @@ export default StyleSheet.create({
     },
     detail:{
         marginTop:20,
-        flex:2,
+        flex:1.5,
         alignItems:'center',
         paddingHorizontal:20
     },
@@ -40,14 +40,13 @@ export default StyleSheet.create({
         color:colors.secondary
     },
       body:{
-          marginTop:20,
-          flex:4,
+          flex:4.5,
           alignItems:'center'
       },
       button1:{
         width:250,
           height:80,
-          borderRadius:20,
+          borderRadius:10,
           backgroundColor:colors.primary,
           justifyContent:'center',
           alignItems:'center',
@@ -61,11 +60,20 @@ export default StyleSheet.create({
       button2:{
         width:250,
         height:80,
-        borderRadius:20,
+        borderRadius:10,
         justifyContent:'center',
         alignItems:'center',
-        backgroundColor: 'rgba(0, 0, 0, 0.5)'
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
        
+    },
+    button3:{
+      width:250,
+        height:80,
+        borderRadius:10,
+        backgroundColor:colors.primary,
+        justifyContent:'center',
+        alignItems:'center',
+        marginTop:30,
     },
     buttonText2:{
       fontSize: 22,
