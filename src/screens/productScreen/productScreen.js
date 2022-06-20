@@ -11,6 +11,7 @@ import { ScrollView, TextInput, TouchableOpacity } from 'react-native-gesture-ha
 import style from '../../styles/global.style';
 const ProductScreen = ({navigation,route}) => {
   const product = route.params.product;
+  const imageUrl = 'https://mallofryk.com/admin/assets/pro_img/'
   const dispatch = useDispatch();
   const cartDetail = useSelector(state => state.cart.cart);
   const addCartDetail = cart => {
@@ -21,10 +22,10 @@ const ProductScreen = ({navigation,route}) => {
   };
   const pushCart =()=>{
     var cart = {
-      id :product.id,
-      image: product.image,
-      title: product.title,
-      price: product.price,
+      pro_id :product.pro_id,
+      pro_image: product.pro_image,
+      pro_name: product.pro_name,
+      pro_new_price: product.pro_new_price,
       quantity:quantity
     }
     addCartDetail(cart);
@@ -47,7 +48,7 @@ const ProductScreen = ({navigation,route}) => {
 const checkDuplicate = (cart) => {
   var flag = false;
   const filtered = cartDetail.filter(item =>{
-    if (item.id == cart.id){
+    if (item.pro_id == cart.pro_id){
       flag = true;
       item.quantity = item.quantity + quantity;
     }
@@ -77,16 +78,16 @@ const checkDuplicate = (cart) => {
             </TouchableOpacity>
       </View>
       <View style={styles.coverImage}>
-      <Image style={styles.imageStyle} source={product.image}/>
+      <Image style={styles.imageStyle} source={{uri: imageUrl+product.pro_image}}/>
         </View> 
         <View style={styles.row1}>
-        <Text style={styles.title}>{product.title}</Text> 
+        <Text style={styles.title}>{product.pro_name}</Text> 
         {favourite ? 
         <MaterialIcons name='favorite' size={28} color={'red'} onPress={()=>setFavourite(false)}/>:
         <MaterialIcons name='favorite-outline' size={28} color={'red'} onPress={()=>setFavourite(true)}/>}
         </View>  
-        <Text style={styles.description}>{product.description}</Text>
-        <Text style={styles.price}>Rs. {product.price}.00</Text>
+        <Text style={styles.description}>Here is Product Description Here is Product Description.Here is Product Description.Here is Product Description</Text>
+        <Text style={styles.price}>Rs. {product.pro_new_price}.00</Text>
         <Text style={styles.instructionTitle}>Special instructions</Text>
         <Text style={styles.instructionDescription}>Please let us know if you are allergic to anything or if we need to avoid anything</Text>
         <TextInput style={styles.textInput} placeholder='e.g. no mayo' numberOfLines={3}/>
