@@ -39,7 +39,6 @@ export default StyleSheet.create({
         width: 105,
         marginHorizontal:5,
         marginVertical:5,
-        justifyContent: 'center',
         alignItems: 'center',
         elevation:5,
         borderRadius:20,

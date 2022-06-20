@@ -29,6 +29,8 @@ const ResturantScreen = ({navigation,route}) => {
   };
   const [favourite, setFavourite] = useState(false);
   const [cart, setCart] = useState(cartDetail.length);
+  const dummyResturant = require('../../assets/images/resturantDummy.png')
+  const imageUrl = 'https://mallofryk.com/admin/assets/pro_img/';
   const [products, setProducts] = useState([
     {
       id:1,
@@ -119,9 +121,9 @@ const ResturantScreen = ({navigation,route}) => {
       <View style={styles.coverImage4}>
         <ImageBackground
           style={styles.imageStyle4}
-          source={resturant.image}>
+          source={resturant.sho_image ? {uri: imageUrl+resturant.sho_image}:dummyResturant}>
           <View style={styles.row4}>
-            <Text style={styles.title4}>{resturant.title}</Text>
+            <Text style={styles.title4}>{resturant.sho_name}</Text>
             {favourite ? (
               <View style={styles.icon}>
                 <MaterialIcons

@@ -6,24 +6,24 @@ import HomeSwiper from '../../components/homeSwiper/homeSwiper';
 import colors from '../../assets/colors/colors';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 const HomeScreen = ({navigation}) => {
-  const backAction = () => {
-    Alert.alert("Hold on!", "Are you sure you want to exit the app?", [
-      {
-        text: "Cancel",
-        onPress: () => null,
-        style: "cancel"
-      },
-      { text: "YES", onPress: () => BackHandler.exitApp() }
-    ]);
-    return true;
-  };
+  // const backAction = () => {
+  //   Alert.alert("Hold on!", "Are you sure you want to exit the app?", [
+  //     {
+  //       text: "Cancel",
+  //       onPress: () => null,
+  //       style: "cancel"
+  //     },
+  //     { text: "YES", onPress: () => BackHandler.exitApp() }
+  //   ]);
+  //   return true;
+  // };
 
-  useEffect(() => {
-    BackHandler.addEventListener("hardwareBackPress", backAction);
+  // useEffect(() => {
+  //   BackHandler.addEventListener("hardwareBackPress", backAction);
 
-    return () =>
-      BackHandler.removeEventListener("hardwareBackPress", backAction);
-  }, []);
+  //   return () =>
+  //     BackHandler.removeEventListener("hardwareBackPress", backAction);
+  // }, []);
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
