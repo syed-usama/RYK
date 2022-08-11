@@ -7,6 +7,7 @@ import FoodScreen from "../screens/foodScreen/foodScreen";
 import CartScreen from "../screens/cartScreen/cartScreen";
 import ProductScreen from "../screens/productScreen/productScreen";
 import ResturantScreen from "../screens/resturantScreen/resturantScreen";
+import CheckoutScreen from "../screens/checkoutScreen/checkoutScreen";
 
 
 const Stack = createStackNavigator();
@@ -26,6 +27,7 @@ const FoodStackNavigator = () => {
     <Stack.Navigator screenOptions={{headerShown: false}}>
        <Stack.Screen name="FoodHome" component={FoodScreen} />
        <Stack.Screen name="CartScreen" component={CartScreen} />
+       <Stack.Screen name="CheckoutScreen" component={CheckoutScreen} />
        <Stack.Screen name="ProductScreen" component={ProductScreen} />
        <Stack.Screen name="ResturantScreen" component={ResturantScreen} />
     </Stack.Navigator>

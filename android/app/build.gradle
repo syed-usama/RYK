@@ -262,6 +262,9 @@ android {
 }
 
 dependencies {
+    //gif
+    implementation 'com.facebook.fresco:animated-gif:2.5.0'
+    //jar
     implementation fileTree(dir: "libs", include: ["*.jar"])
 
     //noinspection GradleDynamicVersion

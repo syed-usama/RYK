@@ -8,22 +8,37 @@ export default StyleSheet.create({
       },
       header:{
         height: 50,
+        width:wp(100),
+        position:'absolute',
+        zIndex:1,
         flexDirection: 'row',
-        paddingHorizontal: 15,
-        backgroundColor: 'white',
+        paddingHorizontal: 20,
+        marginTop:30,
         alignItems:'center',
         justifyContent:'space-between'
+      },
+      backIcon:{
+        height:34,
+        width:34,
+        borderRadius:17,
+        alignItems:'center',
+        justifyContent:'center',
+        backgroundColor:'white',
+      },
+      frame:{
+        width:wp(100),
+        height:hp(30)
       },
       titleText: {
         fontSize: 20,
         fontWeight:'700',
         color:colors.secondary
       },
-      coverImage:{
+      coverImage4:{
           height:hp(30),
           width:wp(100)
       },
-      imageStyle:{
+      imageStyle4:{
         height:hp(30),
         width:wp(100),
         resizeMode: 'stretch'
@@ -68,7 +83,7 @@ export default StyleSheet.create({
         color:colors.white
       },
       instructionTitle:{
-        marginTop:20,
+        marginTop:50,
         fontSize: 20,
         fontWeight:'600',
         color:colors.black,
@@ -89,7 +104,7 @@ textInput:{
   marginHorizontal:15,
 },
 row:{
-  marginTop:40,
+  height:hp(10),
   flexDirection:'row',
   justifyContent:'space-between',
   marginHorizontal:10,

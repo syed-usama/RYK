@@ -6,6 +6,7 @@ export default StyleSheet.create({
         backgroundColor: 'white',
       },
       header:{
+        marginTop:30,
         height: 50,
         flexDirection: 'row',
         paddingHorizontal: 15,
