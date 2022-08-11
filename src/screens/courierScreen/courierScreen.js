@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react';
-import {View, Text, SafeAreaView} from 'react-native';
+import {View, Text, SafeAreaView, StatusBar} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {AuthContext} from '../../services/firebase/authProvider';
 import styles from './courierScreen.style';
@@ -11,6 +11,7 @@ const CourierScreen = ({navigation}) => {
     },[])
   return (
     <SafeAreaView style={styles.container}>
+      <StatusBar translucent={true} backgroundColor={colors.primary} />
       <View style={styles.header}>
           <Icon
             name="bars"

@@ -12,8 +12,12 @@ export default StyleSheet.create({
   },
   badgeIconView:{
     position:'relative',
-    height:29,
-    justifyContent:'flex-end',
+    height:34,
+    width:34,
+    borderRadius:17,
+    backgroundColor:'white',
+    justifyContent:'center',
+    alignItems:'center',
   },
   badgeView:{
     backgroundColor: colors.primary,

@@ -51,49 +51,59 @@ barText:{
     color:'black'
 },
       cartSection:{
-        
-        borderColor:'grey',
-        borderRadius:10,
-        marginTop:10,
+        borderBottomWidth:0.5,
+        borderBottomColor:'grey',
+        paddingVertical:10,
         
       },
+      card:{
+        marginHorizontal:20,
+        marginVertical:10,
+        elevation:5,
+        paddingHorizontal:20,
+        paddingVertical:17,
+        backgroundColor:'white',
+      },
+cardRow:{
+    paddingBottom:9,
+    flexDirection:'row',
+    alignItems:'center',
+},
+cardTitle:{
+    fontSize:18,
+    fontFamily:Fonts.MonSemiBold,
+    color:'black',
+    marginLeft:12,
+},
+cardText:{
+    fontSize:15,
+    fontFamily:Fonts.MonSemiBold,
+    color:'black',
+    marginLeft:12,
+},
       itemSection:{
           flexDirection:'row',
-          paddingHorizontal:10,
-          borderBottomColor:'grey',
-          paddingVertical:15,
-          borderRadius:5,
+          paddingVertical:5,
           alignItems:'center',
-          justifyContent:'space-around',
-          borderBottomWidth:0.5,
-          
-          
+          justifyContent:'space-between',
       },
-imageView:{
-    width:wp(28),
-},
-image:{
-    height:wp(20),
-    width:wp(25),
-    borderRadius:5,
-    resizeMode: 'stretch'
-},
-itemDetail:{
-    width:wp(40),
-    justifyContent:'center'
-},
+      textInput:{
+        marginHorizontal:0,
+        marginVertical:5,
+        height:45,
+        backgroundColor: '#fff',
+      },
 title:{
-    width:wp(40),
+    width:wp(50),
     fontSize:15,
-    fontWeight:'500',
-    color:colors.primary,
+    fontFamily:Fonts.MonMedium,
+    color:'grey',
     marginBottom:6,
 },
-Price:{
-    fontSize:14,
-    fontWeight:'800',
-    color:'black',
-    marginBottom:6
+price:{
+    fontSize:15,
+    fontFamily:Fonts.MonMedium,
+    color:'grey',
 },
 row:{
     flexDirection:'row',
@@ -101,56 +111,14 @@ row:{
     justifyContent:'space-between',
 },
 row1:{
+    paddingVertical:7,
     flexDirection:'row',
-    width:wp(20),
     justifyContent:'space-between'
 },
 row2:{
     flexDirection:'row',
     alignItems:'center'
 },
-fastDelivery:{
-    fontSize:14,
-    fontWeight:'600',
-    color:'black',
-    marginLeft:4
-},
-minus:{
-    height:20,
-    width:20,
-    borderWidth:1,
-    borderColor:'grey',
-    borderRadius:10,
-    alignItems:'center',
-    justifyContent:'center',
-},
-quantity:{
-    fontSize:14,
-    fontWeight:'600',
-    color:'black'
-},
-plus:{
-    fontSize:14,
-    fontWeight:'600',
-    color:'black',
-    marginTop:-2,
-},
-button:{
-    alignItems:'center',
-    height:25,
-    borderColor: 'grey',
-    backgroundColor:colors.primary,
-    borderRadius:5,
-    marginTop:15,
-    marginHorizontal:40,
-    justifyContent:'center'
-},
-buttonText:{
-    fontSize:14,
-    fontWeight:'600',
-    color:colors.white,
-},
-
 button2:{
     marginHorizontal:18,
     alignItems:'center',

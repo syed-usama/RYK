@@ -1,5 +1,5 @@
 import React, {useEffect,useContext}from 'react';
-import {View, Text, SafeAreaView, ImageBackground,BackHandler,Alert} from 'react-native';
+import {View, Text, SafeAreaView, ImageBackground,BackHandler,Alert, StatusBar} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import styles from './homeScreen.style';
 import HomeSwiper from '../../components/homeSwiper/homeSwiper';
@@ -26,6 +26,7 @@ const HomeScreen = ({navigation}) => {
   // }, []);
   return (
     <SafeAreaView style={styles.container}>
+      <StatusBar translucent={true} backgroundColor={colors.primary} />
       <View style={styles.header}>
           <Icon
             name="bars"

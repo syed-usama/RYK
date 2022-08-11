@@ -1,6 +1,7 @@
 import {StyleSheet} from 'react-native';
 import colors from '../../assets/colors/colors';
-import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
+import {widthPercentageToDP as wp, heightPercentageToDP as hp, widthPercentageToDP} from 'react-native-responsive-screen';
+import Fonts from '../../global/constants';
 export default StyleSheet.create({
     container: {
         flex: 1,
@@ -8,16 +9,32 @@ export default StyleSheet.create({
       },
       header:{
         height: 50,
+        width:widthPercentageToDP(100),
+        position:'absolute',
+        zIndex:1,
         flexDirection: 'row',
-        paddingHorizontal: 15,
-        backgroundColor: 'white',
+        paddingHorizontal: 20,
+        marginTop:30,
         alignItems:'center',
         justifyContent:'space-between'
+      },
+      backIcon:{
+        height:34,
+        width:34,
+        borderRadius:17,
+        alignItems:'center',
+        justifyContent:'center',
+        backgroundColor:'white',
+      },
+      frame:{
+        width:wp(100),
+        height:hp(30)
       },
       titleText: {
         fontSize: 20,
         fontWeight:'700',
-        color:colors.secondary
+        color:colors.secondary,
+        fontFamily: Fonts.MonSemiBold,
       },
       coverImage4:{
         height:hp(30),
@@ -27,21 +44,38 @@ export default StyleSheet.create({
       height:hp(30),
       width:wp(100),
       resizeMode: 'stretch',
-      justifyContent:'flex-end'
+      justifyContent:'flex-end',
     },
     row4:{
-      marginTop:20,
-        flexDirection:'row',
+      paddingTop:10,
+    flexDirection:'row',
     justifyContent:'space-between',
     paddingHorizontal:15,
     alignItems:'center',
-    paddingVertical:15,
-    backgroundColor:'rgba(0,0,0,0.3)'
+    backgroundColor:'white'
+  },
+  ratingText:{
+    marginLeft:3,
+    textAlignVertical:'center',
+    fontSize: 14,
+    color:colors.black,
+  },
+  deliveryText:{
+    marginLeft:5,
+    textAlignVertical:'center',
+    fontSize: 14,
+    color:colors.black,
+  },
+  infoText:{
+    fontSize: 14,
+      color:colors.black,
+      fontFamily: Fonts.MonSemiBold,
   },
     title4:{
-      fontSize: 22,
-      fontWeight:'500',
-      color:colors.white
+      width:wp(80),
+      fontSize: 18,
+      color:colors.black,
+      fontFamily: Fonts.MonBold,
     },
     row3:{
         marginTop:20,
@@ -52,11 +86,6 @@ export default StyleSheet.create({
       alignItems:'center',
       paddingTop:10,
     },
-      title3:{
-        fontSize: 26,
-        fontWeight:'600',
-        color:colors.black
-      },
     icon:{
         alignItems:'center',
         justifyContent:'center',
@@ -69,9 +98,7 @@ export default StyleSheet.create({
       },
       itemSection:{
           flexDirection:'row',
-          paddingVertical:15,
-          paddingHorizontal:20,
-          backgroundColor:'white'
+          justifyContent:'space-between'
       },
 imageView:{
     width:100,
@@ -87,13 +114,13 @@ itemDetail:{
 },
 title:{
     fontSize:16,
-    fontWeight:'800',
     color:'black',
+    fontFamily: Fonts.MonSemiBold,
     marginBottom:6,
 },
 Price:{
     fontSize:14,
-    fontWeight:'400',
+    fontFamily: Fonts.MonRegular,
     color:'black',
     marginBottom:6
 },
@@ -113,12 +140,6 @@ row2:{
     flexDirection:'row',
     alignItems:'center'
 },
-fastDelivery:{
-    fontSize:14,
-    fontWeight:'600',
-    color:'black',
-    marginLeft:4
-},
 minus:{
     height:20,
     width:20,
@@ -130,11 +151,13 @@ minus:{
 },
 quantity:{
     fontSize:14,
+    fontFamily: Fonts.MonBold,
     fontWeight:'600',
     color:'black'
 },
 plus:{
     fontSize:14,
+    fontFamily: Fonts.MonBold,
     fontWeight:'600',
     color:'black',
     marginTop:-2,
@@ -149,7 +172,52 @@ button:{
 },
 buttonText:{
     fontSize:14,
+    fontFamily: Fonts.MonBold,
     fontWeight:'600',
     color:colors.white,
-}
+},
+tabBar: {
+  backgroundColor: '#fff',
+  borderBottomColor: '#f4f4f4',
+  borderBottomWidth: 1,
+  height:60,
+},
+tabContainer: {
+  borderBottomColor: '#090909',
+  marginHorizontal:15,
+},
+tabText: {
+  paddingVertical:15,
+  color: '#9e9e9e',
+  fontSize: 15,
+  fontFamily: Fonts.MonBold,
+},
+separator: {
+  height: 0.5,
+  width: '96%',
+  alignSelf: 'flex-end',
+  backgroundColor: '#eaeaea'
+},
+sectionHeaderContainer: {
+  height: 10,
+  backgroundColor: '#f6f6f6',
+  borderTopColor: '#f4f4f4',
+  borderTopWidth: 1,
+  borderBottomColor: '#f4f4f4',
+  borderBottomWidth: 1
+},
+sectionHeaderText: {
+  color: '#010101',
+  backgroundColor: '#fff',
+  fontSize: 19,
+  fontFamily: Fonts.MonBold,
+  paddingTop: 25,
+  paddingBottom: 5,
+  paddingHorizontal: 15
+},
+itemContainer: {
+  paddingVertical: 20,
+  paddingHorizontal: 15,
+  backgroundColor: '#fff'
+},
 });

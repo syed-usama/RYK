@@ -1,6 +1,6 @@
 import React, {useEffect,useState } from 'react';
-import {View, Text, SafeAreaView, Image,ScrollView} from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import {View, Text, SafeAreaView, Image,ScrollView, StatusBar} from 'react-native';
+import AntDesign from 'react-native-vector-icons/AntDesign';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import styles from './cartScreen.style';
 import colors from '../../assets/colors/colors';
@@ -62,11 +62,11 @@ const CartScreen = ({navigation}) => {
   },[isFocused])
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView>
+      <StatusBar translucent={true} backgroundColor={colors.primary} />
       <View style={styles.header}>
-      <Icon
-            name="chevron-left"
-            size={24}
+      <AntDesign
+            name="close"
+            size={22}
             color={colors.primary}
             onPress={() => navigation.goBack()}
           />
@@ -74,79 +74,99 @@ const CartScreen = ({navigation}) => {
           {/* <Icon name="search" size={25} color={colors.primary} /> */}
           <View></View>
       </View>
+      <View style={styles.barView}>
+        <View style={styles.barItem}>
+          <View style={styles.numberView}>
+            <Text style={{color:'white',fontWeight:'500'}}>1</Text>
+          </View>
+          <Text style={styles.barText}>Menu</Text>
+        </View>
+        <View style={styles.barItem}>
+          <View style={styles.numberView}>
+            <Text style={{color:'white',fontWeight:'500'}}>2</Text>
+          </View>
+          <Text style={styles.barText}>Cart</Text>
+        </View>
+        <View style={styles.barItem}>
+          <View style={[styles.numberView,{backgroundColor:'white',borderWidth:2,borderColor:colors.primary}]}>
+            <Text style={{color:'black',fontWeight:'500'}}>3</Text>
+          </View>
+          <Text style={styles.barText}>Checkout</Text>
+        </View>
+      </View>
+      <ScrollView>
       {products.length == 0 &&
       <View style={{height:600,justifyContent :'center',alignItems:'center'}}>
         <TouchableOpacity onPress={()=> navigation.navigate('FoodHome')}>
-        <Text style={{fontSize:22,textAlign:'center'}}>Cart is Empty</Text>
-        <Text style={{fontSize:22,color:colors.primary}}>Go Back to Home Page</Text>
+        <Text style={{fontSize:22,fontWeight:'700',textAlign:'center',color:'black',}}>Hungry ?</Text>
+        <Text style={{fontSize:14,color:'grey',marginVertical:10}}>You haven't added anything to your cart!</Text>
+        <TouchableOpacity 
+        onPress={()=> navigation.navigate('FoodHome')}
+        style={{backgroundColor:colors.primary,borderRadius:6,height:30,width:80,justifyContent:'center',alignItems:'center',alignSelf:'center'}}>
+          <Text style={{color:'white',fontWeight:'600',fontSize:12}}>Browse</Text>
+        </TouchableOpacity>
         </TouchableOpacity>
       </View>}
       <View style={styles.cartSection}>
         {products.map(item => 
         <View key={item.pro_id} style={styles.itemSection}>
             <View style={styles.imageView}>
-                <Image style={styles.image} source={{uri: imageUrl+item.pro_image}}/>
+                <Image style={styles.image} source={{uri: imageUrl+item.url}}/>
             </View>
             <View style={styles.itemDetail}>
                 <Text style={styles.title}>{item.pro_name}</Text>
-                <Text style={styles.Price}>Rs. {item.pro_new_price} /-</Text>
                 <View style={styles.row}>
-                <View style={styles.row2}>
-                  <MaterialCommunityIcons 
-                                    name="truck-delivery-outline" 
-                                    color={'black'}
-                                    size={14}
-                                    />
-                    <Text style={styles.fastDelivery}>Fast Delivery</Text>
-                    </View>
                     <View style={styles.row1}>
                     <TouchableOpacity onPress={()=>{if (item.quantity> 0) {setQuantity(item.pro_id,item.quantity-1)}}} style={styles.minus}><Text  style={styles.plus}>-</Text></TouchableOpacity>
                     <Text style={styles.quantity}>{item.quantity}</Text>
                     <TouchableOpacity onPress={()=>setQuantity(item.pro_id,item.quantity+1)} style={styles.minus}><Text  style={styles.plus}>+</Text></TouchableOpacity>
                     </View>
                 </View>
-                <TouchableOpacity style={styles.button} onPress={() => remove(item.pro_id)}><Text style={styles.buttonText}>Remove</Text></TouchableOpacity>
             </View>
+            <Text style={[styles.totalText,{fontSize:16}]}>Rs. {item.pro_new_price}.00</Text>
         </View>
         )}
         </View>
         {products.length != 0 &&
-        <Text style={styles.subTitle}>Price Detail</Text>}
-        {products.length != 0 &&
-        <View style={styles.subTotal}>
-          <View style={styles.priceRow}>
-            <Text style={styles.priceText}>Sub Total</Text>
-            <Text style={styles.priceText}>Rs. {total}</Text>
+        <View>
+          <View style= {styles.totalRow}>
+            <Text style={[styles.totalText,{fontSize:16}]}>
+              Subtotal 
+            </Text>
+            <Text style={[styles.totalText,{fontSize:16}]}>
+              Rs. {total}.00
+            </Text>
           </View>
-          <View style={styles.priceRow}>
-            <Text style={styles.priceText}>Discount</Text>
-            <Text style={styles.priceText}>Rs. 100</Text>
-          </View>
-          <View style={styles.priceRow}>
-            <Text style={styles.priceText}>Estimated Tax</Text>
-            <Text style={styles.priceText}>Rs. 120</Text>
-          </View>
-          <View style={styles.priceRow}>
-            <Text style={styles.priceText}>Delivery</Text>
-            <Text style={styles.priceText}>Free</Text>
-          </View>
-          <View style={styles.line}></View>
-          <View style={styles.priceRow}>
-            <Text style={styles.priceText1}>Total Payable</Text>
-            <Text style={styles.priceText1}>Rs. {total}</Text>
+          <View style= {styles.totalRow}>
+            <Text style={styles.totalText1}>
+              Delivery fee 
+            </Text>
+            <Text style={styles.totalText1}>
+              Rs. 70.00
+            </Text>
           </View>
         </View>
         }
-        {products.length != 0 &&
-        <TouchableOpacity style={styles.button2}>
-          <Text style={styles.buttonText2}>Checkout</Text>
-          <MaterialCommunityIcons 
-                                    name="arrow-right" 
-                                    color={'white'}
-                                    size={22}
-                                    />
-        </TouchableOpacity>}
         </ScrollView>
+        {products.length != 0 &&
+        <View>
+          <View style= {styles.totalRow}>
+            <Text style={styles.totalText}>
+              Total 
+              <Text style={{fontSize:10,color:'grey'}}>
+                {' (incl. VAT)'}
+              </Text>
+            </Text>
+            <Text style={styles.totalText}>
+              Rs. {total+70}.00
+            </Text>
+          </View>
+        <TouchableOpacity onPress={()=> navigation.navigate('CheckoutScreen')}
+         style={styles.button2}>
+          <Text style={styles.buttonText2}>Review payment and address</Text>
+        </TouchableOpacity>
+        </View>
+        }
     </SafeAreaView>
   );
 };
