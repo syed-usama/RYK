@@ -1,5 +1,5 @@
 import {StyleSheet,Dimensions} from 'react-native';
-import colors from '../../assets/colors/colors';
+import colors from '../../../assets/colors/colors';
 const {height} = Dimensions.get('screen');
 const height_logo = height * 0.22;
 const width_logo = height * 0.39;

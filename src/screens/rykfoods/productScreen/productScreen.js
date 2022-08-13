@@ -5,16 +5,16 @@ import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import styles from './productScreen.style';
-import colors from '../../assets/colors/colors';
+import colors from '../../../assets/colors/colors';
 import {useSelector,useDispatch} from 'react-redux';
-import { addCart } from '../../services/redux/actions/actions';
+import { addCart } from '../../../services/redux/actions/actions';
 import { ScrollView, TextInput, TouchableOpacity } from 'react-native-gesture-handler';
-import style from '../../styles/global.style';
+import style from '../../../styles/global.style';
 import { heightPercentageToDP } from 'react-native-responsive-screen';
-import { showToast } from '../../services/toast';
+import { showToast } from '../../../services/toast';
 const ProductScreen = ({navigation,route}) => {
   const product = route.params.product;
-  const imageUrl = 'https://mallofryk.com/admin/assets/pro_img/'
+  const imageUrl = 'https://cdn.mallofryk.com/images/products/'
   const dispatch = useDispatch();
   const cartDetail = useSelector(state => state.cart.cart);
   const addCartDetail = cart => {
@@ -86,8 +86,8 @@ const checkDuplicate = (cart) => {
       <View style={styles.coverImage4}>
         <ImageBackground
           style={styles.imageStyle4}
-          source={imageLoading ?{uri: imageUrl+product.url} : require('../../assets/images/gify.gif') } onLoad={() => setImageLoading(true)}>
-          <Image source={require('../../assets/images/frame.png')} style={styles.frame} />
+          source={imageLoading ?{uri: imageUrl+product.url} : require('../../../assets/images/gify.gif') } onLoad={() => setImageLoading(true)}>
+          <Image source={require('../../../assets/images/frame.png')} style={styles.frame} />
         </ImageBackground>
       </View>
       <ScrollView>

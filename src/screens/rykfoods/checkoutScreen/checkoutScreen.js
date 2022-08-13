@@ -4,7 +4,7 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import styles from './checkoutScreen.style';
-import colors from '../../assets/colors/colors';
+import colors from '../../../assets/colors/colors';
 import {useIsFocused} from '@react-navigation/native';
 import {useSelector} from 'react-redux';
 import { TouchableOpacity } from 'react-native-gesture-handler';

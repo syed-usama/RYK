@@ -1,7 +1,7 @@
 import React from "react";
 
 import { createDrawerNavigator } from "@react-navigation/drawer";
-import { FoodStackNavigator } from "./stackNavigator";
+import { FoodStackNavigator, StoreStackNavigator } from "./stackNavigator";
 import HomeScreen from "../screens/homeScreen/homeScreen";
 import CourierScreen from "../screens/courierScreen/courierScreen";
 import { DrawerContent } from "../screens/drawerContent/drawerContent";
@@ -17,6 +17,7 @@ const DrawerNavigator = () => {
        <Drawer.Screen name="HomeScreen" component={HomeScreen} />
        <Drawer.Screen name="FoodScreen" component={FoodStackNavigator} />
        <Drawer.Screen name="CourierScreen" component={CourierScreen} />
+       <Drawer.Screen name="StoreScreen" component={StoreStackNavigator} />
      </Drawer.Navigator>
   );
 }

@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import colors from '../../assets/colors/colors';
+import colors from '../../../assets/colors/colors';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 export default StyleSheet.create({
     container: {
@@ -51,6 +51,7 @@ export default StyleSheet.create({
       alignItems:'center',
     },
       title:{
+        width:wp(80),
         fontSize: 22,
         fontWeight:'500',
         color:colors.black

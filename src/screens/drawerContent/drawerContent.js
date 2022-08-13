@@ -91,7 +91,7 @@ export function DrawerContent(props) {
                                     />
                                 )}
                                 label="RYK Store"
-                                onPress={() => {props.navigation.navigate('CourierScreen')}}
+                                onPress={() => {props.navigation.navigate('StoreScreen')}}
                             />
                             <DrawerItem 
                                 icon={({color, size}) => (

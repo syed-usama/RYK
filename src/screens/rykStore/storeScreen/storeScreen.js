@@ -19,30 +19,33 @@ import {
   widthPercentageToDP,
 } from 'react-native-responsive-screen';
 import {useIsFocused} from '@react-navigation/native';
-import styles from './foodScreen.style';
-import colors from '../../assets/colors/colors';
-import FoodSwiper from '../../components/foodSwiper/foodSwiper';
+import styles from './storeScreen.style';
+import colors from '../../../assets/colors/colors';
 import {useSelector} from 'react-redux';
-import style from '../../styles/global.style';
+import style from '../../../styles/global.style';
 import axios from 'axios';
 import FastImage from 'react-native-fast-image';
-const FoodScreen = ({navigation}) => {
-  const cartDetail = useSelector(state => state.cart.cart);
+import StoreSwiper from '../../../components/storeSwiper/storeSwiper';
+const StoreScreen = ({navigation}) => {
+  const cartDetail = useSelector(state => state.cart.storeCart);
   const [cart, setCart] = useState(cartDetail.length);
   const [loading, setLoading] = useState(false);
   const [restLoader, setRestLoader] = useState(false);
   const [limit, setLimit] = useState(8);
+  const [plimit, setPLimit] = useState(8);
   const [refreshing, setRefreshing] = useState(false);
   const isFocused = useIsFocused();
-  const imageUrl = 'https://mallofryk.com/admin/assets/pro_img/';
-  const dummyResturant = require('../../assets/images/resturantDummy.png');
+  const imageUrl = 'https://cdn.mallofryk.com/images/products/';
+  const dummyResturant = require('../../../assets/images/storeDummy.png');
   const [products, setProducts] = useState([]);
+  const [allProducts, setAllProducts] = useState([]);
+  const [bottom, setBottom] = useState(false);
   const [resturants, setResturants] = useState([]);
 
   const getFoodData = async () => {
     setLoading(true);
     setRefreshing(false);
-    let url = 'https://mallofryk.com/api/Items/foodies/18/18';
+    let url = 'https://mallofryk.com/api/Items/store/12/1';
     axios.get(url)
       .then(response => {
         //console.log('Products Response>', response.data)
@@ -58,10 +61,29 @@ const FoodScreen = ({navigation}) => {
         setLoading(false);
       });
   };
+  const getProducts = async (prlimit) => {
+    setRefreshing(false);
+    let url = 'https://mallofryk.com/api/Items/store/'+prlimit+'/0';
+    axios.get(url)
+      .then(response => {
+        //console.log('Products Response>', response.data)
+        //setLoading(false);
+        let data = response.data;
+        if (data.length > 0) {
+          setAllProducts(data);
+          setLoading(false);
+          setBottom(false)
+        }
+      })
+      .catch(error => {
+        console.log('Error>>>', error);
+        setLoading(false);
+      });
+  };
   const getResturantsData = async (rlimit) => {
     // setLoading(true);
     setRestLoader(true)
-    let url = 'https://mallofryk.com/api/Items/resturants/'+rlimit+'/0';
+    let url = 'https://mallofryk.com/api/Items/shops/'+rlimit+'/0';
     axios.get(url)
       .then(response => {
         //console.log('Response>', response.data)
@@ -82,17 +104,44 @@ const FoodScreen = ({navigation}) => {
     });
     setProducts(filtered);
 }
+const setImageLoader2 = (pro_id ) => {
+  const filtered = allProducts.filter((item) => {
+      if (item.pro_id == pro_id){
+          item.loading = true;
+      }
+      return item;
+  });
+  setAllProducts(filtered);
+  
+}
+const isCloseToBottom = ({layoutMeasurement, contentOffset, contentSize}) => {
+  const paddingToBottom = 20;
+  return layoutMeasurement.height + contentOffset.y >=
+    contentSize.height - paddingToBottom;
+};
+const bottomCall =() =>{
+  if(!bottom){
+    setBottom(true)
+    setPLimit(plimit+5)
+    getProducts(plimit+5)
+    console.log('BottomCall')
+  }
+}
+
   const onRefresh = () => {
     setRefreshing(true);
     getFoodData();
+    getProducts(plimit);
     getResturantsData(limit);
   };
   useEffect(() => {
     getFoodData();
+    getProducts(plimit);
     getResturantsData(limit);
   }, []);
   useEffect(() => {
     setCart(cartDetail.length);
+    setBottom(false)
   }, [isFocused]);
   const renderProducts = ({ item }) => {
     return (
@@ -100,12 +149,12 @@ const FoodScreen = ({navigation}) => {
                   key={item.pro_id}
                   style={styles.favourite}
                   onPress={() =>
-                    navigation.navigate('ProductScreen', {product: item})
+                    navigation.navigate('StoreProduct', {product: item})
                   }>
                   <FastImage
                     style={styles.itemImage}
                     resizeMode="stretch"
-                    source={item.loading ? {uri: imageUrl + item.url} : require('../../assets/images/gify.gif')}
+                    source={item.loading ? {uri: imageUrl + item.url} : require('../../../assets/images/gify.gif')}
                     onLoad={() => setImageLoader(item.pro_id)}
                   />
                   <Text numberOfLines={1} style={styles.itemText}>
@@ -117,11 +166,34 @@ const FoodScreen = ({navigation}) => {
                 </TouchableOpacity>
     )
     }
+    const renderAllProducts = ({ item }) => {
+      return (
+        <TouchableOpacity
+                    key={item.pro_id}
+                    style={styles.favourite1}
+                    onPress={() =>
+                      navigation.navigate('StoreProduct', {product: item})
+                    }>
+                    <FastImage
+                      style={styles.itemImage1}
+                      resizeMode="stretch"
+                      source={item.loading ? {uri: imageUrl + item.url} : require('../../../assets/images/gify.gif')}
+                      onLoad={() => setImageLoader2(item.pro_id)}
+                    />
+                    <Text numberOfLines={1} style={styles.itemText}>
+                      {item.pro_name}
+                    </Text>
+                    <Text style={styles.itemText1}>
+                      Rs: {item.pro_new_price}
+                    </Text>
+                  </TouchableOpacity>
+      )
+      }
     const renderResturants = ({ item,index }) => {
       return (
         <TouchableOpacity
                   onPress={() =>
-                    navigation.navigate('ResturantScreen', {
+                    navigation.navigate('ShopScreen', {
                       resturant: item,
                     })
                   }
@@ -194,9 +266,9 @@ const FoodScreen = ({navigation}) => {
           color={colors.primary}
           onPress={() => navigation.openDrawer()}
         />
-        <Text style={styles.titleText}>RYK<Text style={[styles.titleText,{color:colors.primary}]}> Foodies</Text></Text>
+        <Text style={styles.titleText}>RYK<Text style={[styles.titleText,{color:colors.primary}]}> Store</Text></Text>
         <TouchableOpacity
-          onPress={() => navigation.navigate('CartScreen')}
+          onPress={() => navigation.navigate('StoreCart')}
           style={style.badgeIconView}>
           <MaterialCommunityIcons
             name="cart-outline"
@@ -213,19 +285,26 @@ const FoodScreen = ({navigation}) => {
         <View style={styles.searchView}>
           <Icon name="search" size={22} color="grey" />
           <Text style={styles.searchText}>
-            Search for Resturant, Food Items
+            Search for Shops, Store Items
           </Text>
         </View>
       </View>
       <ScrollView showsVerticalScrollIndicator={false}
       refreshControl={
         <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-      }>
+      }
+      onScroll={({nativeEvent}) => {
+        if (isCloseToBottom(nativeEvent)) {
+          bottomCall();
+        }
+      }}
+      scrollEventThrottle={400}
+      >
         <View
           style={{
             height: hp(26),
           }}>
-          <FoodSwiper />
+          <StoreSwiper />
         </View>
         <View style={{height: hp(26)}}>
           <View style={{flex: 1, paddingLeft: 20}}>
@@ -236,13 +315,13 @@ const FoodScreen = ({navigation}) => {
                 color: colors.secondary,
                 marginTop: 5,
               }}>
-              Your <Text
+              Top <Text
               style={{
                 fontSize: 20,
                 fontWeight: '700',
                 color: colors.primary,
                 marginTop: 5,
-              }}>Favourite</Text>
+              }}>Selling</Text>
             </Text>
           </View>
           <View style={{ paddingLeft: 10}}>
@@ -263,7 +342,7 @@ const FoodScreen = ({navigation}) => {
                 color: colors.secondary,
                 marginTop: 7,
               }}>
-              Restaurants
+              Brands
             </Text>
           </View>
           <View style={{flex: 5, flexDirection: 'row'}}>
@@ -288,7 +367,7 @@ const FoodScreen = ({navigation}) => {
             </ScrollView>
           </View>
         </View>
-        <View style={{height: hp(50)}}>
+        <View style={{height: hp(25)}}>
           <View style={{paddingLeft: 20}}>
             <Text
               style={{
@@ -298,14 +377,14 @@ const FoodScreen = ({navigation}) => {
                 marginTop: 5,
                 marginBottom: 5,
               }}>
-              Summer <Text
+              Featured <Text
               style={{
                 fontSize: 20,
                 fontWeight: '700',
                 color: colors.primary,
                 marginTop: 5,
                 marginBottom: 5,
-              }}>Deals</Text>
+              }}>Products</Text>
             </Text>
           </View>
           <View style={{ paddingLeft: 10}}>
@@ -316,15 +395,49 @@ const FoodScreen = ({navigation}) => {
                   renderItem={renderProducts}
               />
           </View>
-          <View style={{ paddingLeft: 10}}>
+          {/* <View style={{ paddingLeft: 10}}>
               <FlatList
                   data={products.slice(12, 18)}
                   showsHorizontalScrollIndicator={false}
                   horizontal={true}
                   renderItem={renderProducts}
               />
+          </View> */}
+        </View>
+        <View >
+          <View style={{paddingLeft: 20}}>
+            <Text
+              style={{
+                fontSize: 20,
+                fontWeight: '700',
+                color: colors.secondary,
+                marginTop: 5,
+                marginBottom: 5,
+              }}>
+              All <Text
+              style={{
+                fontSize: 20,
+                fontWeight: '700',
+                color: colors.primary,
+                marginTop: 5,
+                marginBottom: 5,
+              }}>Products</Text>
+            </Text>
+          </View>
+          <View style={{ paddingLeft: 10}}>
+              <FlatList
+                  data={allProducts}
+                  numColumns={2}
+                  showsVerticalScrollIndicator={false}
+                  renderItem={renderAllProducts}
+              />
           </View>
         </View>
+        {bottom &&
+        <View style={{paddingVertical:10,alignItems:'center',justifyContent:'center'}}>
+          <ActivityIndicator color={colors.primary}/>
+        </View>
+        }
         {/* </ImageBackground> */}
         <View style={{height: 30}}></View>
       </ScrollView>
@@ -332,4 +445,4 @@ const FoodScreen = ({navigation}) => {
   );
 };
 
-export default FoodScreen;
+export default StoreScreen;

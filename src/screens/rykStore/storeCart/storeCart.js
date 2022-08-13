@@ -2,25 +2,19 @@ import React, {useEffect,useState } from 'react';
 import {View, Text, SafeAreaView, Image,ScrollView, StatusBar} from 'react-native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import styles from './cartScreen.style';
-import colors from '../../assets/colors/colors';
-import { addCart } from '../../services/redux/actions/actions';
+import styles from './storeCart.style';
+import colors from '../../../assets/colors/colors';
+import { addCart } from '../../../services/redux/actions/actions';
 import {useIsFocused} from '@react-navigation/native';
 import {useSelector,useDispatch} from 'react-redux';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-const CartScreen = ({navigation}) => {
-  const cartDetail = useSelector(state => state.cart.cart);
+const StoreCart = ({navigation}) => {
+  const cartDetail = useSelector(state => state.cart.storeCart);
   const [products, setProducts] = useState(cartDetail);
   const [total, setTotal] = useState(0);
   const isFocused = useIsFocused();
-  const imageUrl = 'https://mallofryk.com/admin/assets/pro_img/'
+  const imageUrl = 'https://cdn.mallofryk.com/images/products/'
   const dispatch = useDispatch();
-  const addCartDetail = cart => {
-    let result = cartDetail;
-    result.push(cart);
-    dispatch(addCart(result));
-    setCart(cartDetail.length)
-  };
   const setQuantity = (pro_id,quantity) =>{
     if (quantity == 0){
       remove(pro_id)
@@ -161,7 +155,7 @@ const CartScreen = ({navigation}) => {
               Rs. {total+70}.00
             </Text>
           </View>
-        <TouchableOpacity onPress={()=> navigation.navigate('CheckoutScreen')}
+        <TouchableOpacity onPress={()=> navigation.navigate('StoreCheckout')}
          style={styles.button2}>
           <Text style={styles.buttonText2}>Review payment and address</Text>
         </TouchableOpacity>
@@ -171,5 +165,5 @@ const CartScreen = ({navigation}) => {
   );
 };
 
-export default CartScreen;
+export default StoreCart;
 

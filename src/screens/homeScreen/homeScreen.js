@@ -57,7 +57,7 @@ const HomeScreen = ({navigation}) => {
         </View>
         </ImageBackground>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.button3} onPress={() => navigation.navigate('CourierScreen')}>
+        <TouchableOpacity style={styles.button3} onPress={() => navigation.navigate('StoreScreen')}>
         <Text style={styles.buttonText1}>RYK Store</Text>
         </TouchableOpacity>
         </View>

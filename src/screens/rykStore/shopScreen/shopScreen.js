@@ -7,20 +7,16 @@ import {
   BackHandler,
   StatusBar,
   ImageBackground,
-  ScrollView,
   ActivityIndicator,
-  useWindowDimensions,
 } from 'react-native';
 import FastImage from 'react-native-fast-image'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import AntDesign from 'react-native-vector-icons/AntDesign';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import styles from './resturantScreen.style';
-import colors from '../../assets/colors/colors';
-import style from '../../styles/global.style';
-import {useSelector,useDispatch} from 'react-redux';
-import { addCart } from '../../services/redux/actions/actions';
+import styles from './shopScreen.style';
+import colors from '../../../assets/colors/colors';
+import style from '../../../styles/global.style';
+import {useSelector} from 'react-redux';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import { AirbnbRating } from "react-native-elements";
 import axios from 'axios';
@@ -28,30 +24,23 @@ import axios from 'axios';
 import SectionList from 'react-native-tabs-section-list';
 import { heightPercentageToDP } from 'react-native-responsive-screen';
 // import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
-const ResturantScreen = ({navigation,route}) => {
+const ShopScreen = ({navigation,route}) => {
   const resturant = route.params.resturant;
-  const dispatch = useDispatch();
-  const cartDetail = useSelector(state => state.cart.cart);
-  const addCartDetail = cart => {
-    let result = cartDetail;
-    result.push(cart);
-    dispatch(addCart(result));
-    setCart(cartDetail.length)
-  };
+  const cartDetail = useSelector(state => state.cart.storeCart);
   const [favourite, setFavourite] = useState(false);
   const [imageLoading, setImageLoading] = useState(false);
   const [cart, setCart] = useState(cartDetail.length);
-  const dummyResturant = require('../../assets/images/resturantDummy.png')
+  const dummyResturant = require('../../../assets/images/storeDummy.png');
   const imageUrl = 'https://mallofryk.com/admin/assets/pro_img/';
   const [loading, setLoading] = useState(true);
-  const [products, setProducts] = useState([])
   const getFoodData = async () => {
     setLoading(true)
     let url = 'https://mallofryk.com/api/Items/Resfoodies/50/0/'+route.params.resturant.sho_id;
     axios.get(url)
       .then(response => {
         //console.log('Products Response>', response.data)
-        console.log('Resturant')
+        console.log('ShopId>>>>',route.params.resturant.sho_id)
+        console.log('products>>>>',response.data.length)
         let data = response.data;
         if (data.length > 0) {
           //setProducts(data);
@@ -68,7 +57,7 @@ const ResturantScreen = ({navigation,route}) => {
   };
   const getCatogries = async (items) => {
     setLoading(true)
-    let url = 'https://mallofryk.com/api/Items/resturantsCat/'+route.params.resturant.sho_id;
+    let url = 'https://mallofryk.com/api/Items/shopCat/'+route.params.resturant.sho_id;
     axios.get(url)
       .then(async response => {
         //console.log('Products Response>', response.data)
@@ -77,10 +66,10 @@ const ResturantScreen = ({navigation,route}) => {
           let sections = [];
           await data.filter((item)=>{
             let product={};
-            product.title = item.cat_name;
+            product.title = item.mca_name;
             let itemData = [];
             for(let i = 0;i<items.length;i++){
-              if(item.cat_id == items[i].mca_id){
+              if(item.cat_id == items[i].meg_id){
                 itemData.push(items[i])
                 // console.log(0)
               }
@@ -107,30 +96,6 @@ const ResturantScreen = ({navigation,route}) => {
   useEffect(() => {
     getFoodData()
   }, []);
-  const setQuantity = (id,quantity) =>{
-    var filtered = products.filter(product => {
-      if (id == product.id){
-        product.quantity = quantity;
-      }
-      return product;
-    });
-    setProducts(filtered);
-  }
-  const checkDuplicate = (cart) => {
-    var flag = false;
-    const filtered = cartDetail.filter(item =>{
-      if (item.id == cart.id){
-        flag = true;
-        item.quantity = item.quantity + cart.quantity;
-      }
-      return item;
-    });
-    if (flag){
-      dispatch(addCart(filtered));
-    }else{
-      addCartDetail(cart);
-    }
-  }
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar translucent={true} backgroundColor='transparent' />
@@ -143,7 +108,7 @@ const ResturantScreen = ({navigation,route}) => {
         />
         </TouchableOpacity>
         {/* <Text style={styles.titleText}>RYK Foodies</Text> */}
-        <TouchableOpacity onPress={() => navigation.navigate('CartScreen')} style={style.badgeIconView}>
+        <TouchableOpacity onPress={() => navigation.navigate('storeCart')} style={style.badgeIconView}>
             <MaterialCommunityIcons name="cart-outline" size={24} color={colors.primary} />
             <View style={style.badgeView}><Text style={style.badge}>{cart}</Text></View>
             </TouchableOpacity>
@@ -151,8 +116,8 @@ const ResturantScreen = ({navigation,route}) => {
       <View style={styles.coverImage4}>
         <ImageBackground
           style={styles.imageStyle4}
-          source={resturant.sho_image ? imageLoading ?{uri: imageUrl+resturant.sho_image} : require('../../assets/images/gify.gif') :dummyResturant} onLoad={() => setImageLoading(true)}>
-          <Image source={require('../../assets/images/frame.png')} style={styles.frame} />
+          source={resturant.sho_image ? imageLoading ?{uri: imageUrl+resturant.sho_image} : require('../../../assets/images/gify.gif') :dummyResturant} onLoad={() => setImageLoading(true)}>
+          <Image source={require('../../../assets/images/frame.png')} style={styles.frame} />
         </ImageBackground>
       </View>
       {/* <TabView
@@ -242,7 +207,7 @@ const ResturantScreen = ({navigation,route}) => {
           )}
           renderItem={({ item }) => (
             <View style={styles.itemContainer}>
-              <TouchableOpacity style={styles.itemSection} onPress={()=> navigation.navigate('ProductScreen', {product: item})}>
+              <TouchableOpacity style={styles.itemSection} onPress={()=> navigation.navigate('StoreProduct', {product: item})}>
           <View>
             <Text style={styles.title}>{item.pro_name}</Text>
             <Text style={styles.Price}>Rs. {item.pro_new_price} /-</Text>
@@ -264,7 +229,7 @@ const ResturantScreen = ({navigation,route}) => {
           <ActivityIndicator color={colors.primary}
           size={30}/>
           :
-          <Text style={{color:colors.black}}>This Resturant has currently no Items</Text>
+          <Text style={{color:colors.black}}>This Shop has currently no Items</Text>
   }
           </View>
                   }
@@ -329,4 +294,4 @@ const ResturantScreen = ({navigation,route}) => {
   );
 };
 
-export default ResturantScreen;
+export default ShopScreen;

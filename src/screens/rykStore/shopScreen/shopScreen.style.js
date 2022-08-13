@@ -1,7 +1,7 @@
 import {StyleSheet} from 'react-native';
-import colors from '../../assets/colors/colors';
+import colors from '../../../assets/colors/colors';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp, widthPercentageToDP} from 'react-native-responsive-screen';
-import Fonts from '../../global/constants';
+import Fonts from '../../../global/constants';
 export default StyleSheet.create({
     container: {
         flex: 1,
