@@ -25,6 +25,7 @@ import SectionList from 'react-native-tabs-section-list';
 import { heightPercentageToDP } from 'react-native-responsive-screen';
 // import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
 const ShopScreen = ({navigation,route}) => {
+
   const resturant = route.params.resturant;
   const cartDetail = useSelector(state => state.cart.storeCart);
   const [favourite, setFavourite] = useState(false);
@@ -33,15 +34,21 @@ const ShopScreen = ({navigation,route}) => {
   const dummyResturant = require('../../../assets/images/storeDummy.png');
   const imageUrl = 'https://mallofryk.com/admin/assets/pro_img/';
   const [loading, setLoading] = useState(true);
+
   const getFoodData = async () => {
+
     setLoading(true)
+
     let url = 'https://mallofryk.com/api/Items/Resfoodies/50/0/'+route.params.resturant.sho_id;
+
     axios.get(url)
       .then(response => {
         //console.log('Products Response>', response.data)
         console.log('ShopId>>>>',route.params.resturant.sho_id)
         console.log('products>>>>',response.data.length)
-        let data = response.data;
+
+        let data = [...new Set(response.data)];
+        console.log('data>>>>',data[0])
         if (data.length > 0) {
           //setProducts(data);
           getCatogries(data)
@@ -55,6 +62,7 @@ const ShopScreen = ({navigation,route}) => {
         setLoading(false);
       });
   };
+
   const getCatogries = async (items) => {
     setLoading(true)
     let url = 'https://mallofryk.com/api/Items/shopCat/'+route.params.resturant.sho_id;
@@ -64,17 +72,27 @@ const ShopScreen = ({navigation,route}) => {
         let data = response.data;
         if (data.length > 0) {
           let sections = [];
+
           await data.filter((item)=>{
+
             let product={};
-            product.title = item.mca_name;
             let itemData = [];
-            for(let i = 0;i<items.length;i++){
-              if(item.cat_id == items[i].meg_id){
-                itemData.push(items[i])
-                // console.log(0)
-              }
-            }
+
+            // for(let i = 0;i<items.length;i++){
+            //   if(item.cat_id == items[i].mca_id){
+            //     itemData.push(items[i])
+            //     // console.log(0)
+            //   }
+            // }
+
+            items.forEach(pro => {
+              if(item.cat_id === pro.mca_id)
+                itemData.push(pro)
+            });
+
             product.data=itemData;
+            product.title = item.mca_name;
+            
             // console.log(1)
             sections.push(product);
 
@@ -93,9 +111,11 @@ const ShopScreen = ({navigation,route}) => {
   };
 
   const [sections ,setSections] = useState([]);
+
   useEffect(() => {
     getFoodData()
   }, []);
+
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar translucent={true} backgroundColor='transparent' />

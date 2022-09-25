@@ -6,36 +6,18 @@ import HomeSwiper from '../../components/homeSwiper/homeSwiper';
 import colors from '../../assets/colors/colors';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 const HomeScreen = ({navigation}) => {
-  // const backAction = () => {
-  //   Alert.alert("Hold on!", "Are you sure you want to exit the app?", [
-  //     {
-  //       text: "Cancel",
-  //       onPress: () => null,
-  //       style: "cancel"
-  //     },
-  //     { text: "YES", onPress: () => BackHandler.exitApp() }
-  //   ]);
-  //   return true;
-  // };
-
-  // useEffect(() => {
-  //   BackHandler.addEventListener("hardwareBackPress", backAction);
-
-  //   return () =>
-  //     BackHandler.removeEventListener("hardwareBackPress", backAction);
-  // }, []);
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar translucent={true} backgroundColor={colors.primary} />
       <View style={styles.header}>
-          <Icon
+          {/* <Icon
             name="bars"
             size={27}
             color={colors.primary}
             onPress={() => navigation.openDrawer()}
-          />
+          /> */}
           <Text style={styles.titleText}>Home</Text>
-          <Icon name="search" size={25} color={colors.primary} />
+          {/* <Icon name="search" size={25} color={colors.primary} /> */}
       </View>
         <View style={styles.homeSwiper}>
           <HomeSwiper/>
@@ -45,10 +27,10 @@ const HomeScreen = ({navigation}) => {
           <Text style={styles.description}>Get one step ahead of your competition and reach your customers with the strength of the ""RYK Couriers"" global network.</Text>
           </View>
       <View style={styles.body}>
-      <TouchableOpacity style={styles.button1} onPress={() => navigation.navigate('FoodScreen')}>
+      <TouchableOpacity style={styles.button1} onPress={() => navigation.navigate('FoodDrawer')}>
         <Text style={styles.buttonText1}>RYK Foodies</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => navigation.navigate('CourierScreen')}>
+        <TouchableOpacity onPress={() => navigation.navigate('CourierDrawer')}>
           <ImageBackground style={styles.buttonImage2} 
           imageStyle={{borderRadius:10,borderWidth:1,borderColor:colors.secondary}} 
           source={require('../../assets/images/slider_images/slide2.jpeg')}>
@@ -57,7 +39,7 @@ const HomeScreen = ({navigation}) => {
         </View>
         </ImageBackground>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.button3} onPress={() => navigation.navigate('StoreScreen')}>
+        <TouchableOpacity style={styles.button3} onPress={() => navigation.navigate('StoreDrawer')}>
         <Text style={styles.buttonText1}>RYK Store</Text>
         </TouchableOpacity>
         </View>

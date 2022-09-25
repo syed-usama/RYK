@@ -11,11 +11,11 @@ import {
 } from '@react-navigation/drawer';
 import Iconn from 'react-native-vector-icons/Ionicons';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import styles from './drawerContent.style';
-import { AuthContext } from '../../services/firebase/authProvider';
-import colors from '../../assets/colors/colors';
+import styles from './foodDrawerContent.style';
+import { AuthContext } from '../../../services/firebase/authProvider';
+import colors from '../../../assets/colors/colors';
   
-export function DrawerContent(props) {
+export function FoodDrawerContent(props) {
     const {user, login, register, logout} = useContext(AuthContext);
     return(
         <View style={{flex:1}}>
@@ -47,7 +47,7 @@ export function DrawerContent(props) {
                                     />
                                 )}
                                 label="Home"
-                                onPress={() => {props.navigation.navigate('HomeScreen')}}
+                                onPress={() => {props.navigation.navigate('FoodScreen')}}
                             />
                             <DrawerItem 
                                 icon={({color, size}) => (
@@ -58,40 +58,7 @@ export function DrawerContent(props) {
                                     />
                                 )}
                                 label="Profile"
-                                onPress={() => {props.navigation.navigate('CourierScreen')}}
-                            />
-                            <DrawerItem 
-                                icon={({color, size}) => (
-                                    <Icon 
-                                    name="truck-delivery-outline" 
-                                    color={color}
-                                    size={size}
-                                    />
-                                )}
-                                label="RYK Courier"
-                                onPress={() => {props.navigation.navigate('CourierScreen')}}
-                            />
-                            <DrawerItem 
-                                icon={({color, size}) => (
-                                    <Icon 
-                                    name="food" 
-                                    color={color}
-                                    size={size}
-                                    />
-                                )}
-                                label="RYK Food"
-                                onPress={() => {props.navigation.navigate('FoodScreen')}}
-                            />
-                            <DrawerItem 
-                                icon={({color, size}) => (
-                                    <Icon 
-                                    name="storefront" 
-                                    color={color}
-                                    size={size}
-                                    />
-                                )}
-                                label="RYK Store"
-                                onPress={() => {props.navigation.navigate('StoreScreen')}}
+                                onPress={() => {props.navigation.navigate('ComingSoon')}}
                             />
                             <DrawerItem 
                                 icon={({color, size}) => (
@@ -102,7 +69,7 @@ export function DrawerContent(props) {
                                     />
                                 )}
                                 label="Settings"
-                                onPress={() => {props.navigation.navigate('CourierScreen')}}
+                                onPress={() => {props.navigation.navigate('ComingSoon')}}
                             />
                             <DrawerItem 
                                 icon={({color, size}) => (
@@ -113,7 +80,7 @@ export function DrawerContent(props) {
                                     />
                                 )}
                                 label="Support"
-                                onPress={() => {props.navigation.navigate('CourierScreen')}}
+                                onPress={() => {props.navigation.navigate('ComingSoon')}}
                             />
                         </Drawer.Section>
                         </DrawerContentScrollView>

@@ -1,6 +1,8 @@
 import React, { useContext, useEffect } from 'react';
-import {View, Text, SafeAreaView, StatusBar} from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import {View, Text, SafeAreaView, StatusBar,Image,TouchableOpacity} from 'react-native';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {AuthContext} from '../../services/firebase/authProvider';
 import styles from './courierScreen.style';
 import colors from '../../assets/colors/colors';
@@ -13,18 +15,48 @@ const CourierScreen = ({navigation}) => {
     <SafeAreaView style={styles.container}>
       <StatusBar translucent={true} backgroundColor={colors.primary} />
       <View style={styles.header}>
-          <Icon
+          <FontAwesome
             name="bars"
             size={25}
             color={colors.primary}
             onPress={() => navigation.openDrawer()}
           />
-          <Text style={styles.titleText}>RYK Mall</Text>
-          <Icon name="search" size={25} color={colors.primary} />
+          <Text style={styles.titleText}>RYK Courier</Text>
+          <FontAwesome name="search" size={25} color={colors.primary} />
       </View>
-      <View style={{flex:0.8,justifyContent:'center'}}>
-          <Text style={styles.comingSoon}>Coming Soon ...</Text>
-          </View>
+      <View style={styles.body}>
+        <Image source={require('../../assets/images/ryklogo.png')} style={styles.logo}/>
+        <Text style={styles.bodyText1}>What would you like to do?</Text>
+        <View style={styles.row}>
+          <TouchableOpacity style={styles.card}>
+            <View style={styles.circle}>
+            <MaterialIcons name="corporate-fare" size={30} color={colors.primary} />
+            </View>
+            <Text style={styles.cardText}>Get Rates</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.card}>
+          <View style={styles.circle}>
+            <MaterialCommunityIcons name="cellphone-text" size={30} color={colors.primary} />
+            </View>
+            <Text style={styles.cardText}>Tracking</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={styles.row}>
+          <TouchableOpacity style={styles.card}>
+            <View style={styles.circle}>
+            <MaterialCommunityIcons name="truck-delivery" size={30} color={colors.primary} />
+            </View>
+            <Text style={styles.cardText}>Pick up</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.card}>
+          <View style={styles.circle}>
+            <MaterialCommunityIcons name="file-find" size={30} color={colors.primary} />
+            </View>
+            <Text style={styles.cardText}>Find Us</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+
     </SafeAreaView>
   );
 };

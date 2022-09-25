@@ -13,6 +13,9 @@ import StoreCart from "../screens/rykStore/storeCart/storeCart";
 import StoreProduct from "../screens/rykStore/storeProduct/storeProduct";
 import ShopScreen from "../screens/rykStore/shopScreen/shopScreen";
 import StoreCheckout from "../screens/rykStore/storeCheckout/storeCheckout";
+import { CourierDrawer, FoodDrawer, StoreDrawer } from "./drawerNavigator";
+import HomeScreen from "../screens/homeScreen/homeScreen";
+import ComingSoon from "../screens/comingSoon/comingSoon";
 
 
 const Stack = createStackNavigator();
@@ -26,11 +29,21 @@ const OnBoardStackNavigator = () => {
     </Stack.Navigator>
   );
 }
-
+const DrawerStackNavigator = () => {
+  return (
+    <Stack.Navigator screenOptions={{headerShown: false}}>
+       <Stack.Screen name="HomeScreen" component={HomeScreen} />
+       <Stack.Screen name="FoodDrawer" component={FoodStackNavigator} />
+       <Stack.Screen name="StoreDrawer" component={StoreStackNavigator} />
+       <Stack.Screen name="CourierDrawer" component={CourierDrawer} />
+       <Stack.Screen name="ComingSoon" component={ComingSoon} />
+    </Stack.Navigator>
+  );
+}
 const FoodStackNavigator = () => {
   return (
     <Stack.Navigator screenOptions={{headerShown: false}}>
-       <Stack.Screen name="FoodHome" component={FoodScreen} />
+       <Stack.Screen name="FoodHome" component={FoodDrawer} />
        <Stack.Screen name="CartScreen" component={CartScreen} />
        <Stack.Screen name="CheckoutScreen" component={CheckoutScreen} />
        <Stack.Screen name="ProductScreen" component={ProductScreen} />
@@ -42,7 +55,7 @@ const FoodStackNavigator = () => {
 const StoreStackNavigator = () => {
   return (
     <Stack.Navigator screenOptions={{headerShown: false}}>
-       <Stack.Screen name="StoreHome" component={StoreScreen} />
+       <Stack.Screen name="StoreHome" component={StoreDrawer} />
        <Stack.Screen name="StoreCart" component={StoreCart} />
        <Stack.Screen name="StoreCheckout" component={StoreCheckout} />
        <Stack.Screen name="StoreProduct" component={StoreProduct} />
@@ -51,4 +64,4 @@ const StoreStackNavigator = () => {
   );
 }
 
-export { OnBoardStackNavigator,FoodStackNavigator,StoreStackNavigator };
+export { OnBoardStackNavigator,FoodStackNavigator,StoreStackNavigator,DrawerStackNavigator };

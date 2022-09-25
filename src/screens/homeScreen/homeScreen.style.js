@@ -12,7 +12,7 @@ export default StyleSheet.create({
         paddingHorizontal: 15,
         backgroundColor: 'white',
         alignItems:'center',
-        justifyContent:'space-between'
+        justifyContent:'center'
       },
       titleText: {
         fontSize: 20,

@@ -3,10 +3,9 @@ import {NavigationContainer} from '@react-navigation/native';
 import auth from '@react-native-firebase/auth';
 import {AuthContext} from '../services/firebase/authProvider';
 import React, {useContext, useState, useEffect} from 'react';
-import { OnBoardStackNavigator } from './stackNavigator';
+import { DrawerStackNavigator, OnBoardStackNavigator } from './stackNavigator';
 import { Provider as StoreProvider } from 'react-redux';
 import store from '../services/redux/store/store';
-import DrawerNavigator from './drawerNavigator';
 const Routes = () => {
   const {user, setUser} = useContext(AuthContext);
   const [initializing, setInitializing] = useState(true);
@@ -28,7 +27,7 @@ const Routes = () => {
         <OnBoardStackNavigator />
        : 
        <StoreProvider store={store()}>
-       <DrawerNavigator/>
+       <DrawerStackNavigator/>
        </StoreProvider>
       }
     </NavigationContainer>
