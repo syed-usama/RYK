@@ -5,7 +5,23 @@ import styles from './homeScreen.style';
 import HomeSwiper from '../../components/homeSwiper/homeSwiper';
 import colors from '../../assets/colors/colors';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import {useSelector , useDispatch} from 'react-redux';
+import { get_store_products,get_store_shops } from '../../services/redux/actions/actions';
 const HomeScreen = ({navigation}) => {
+  const store_Shops = useSelector(state => state.shops);
+  const store_Products = useSelector(state => state.store_products);
+  const dispatch = useDispatch();
+  const feedback = (res)=>{
+    console.log("res:",res)
+  }
+  useEffect(()=>{
+    if(store_Shops.length <= 0){
+    dispatch(get_store_shops(1,8,feedback))
+    }
+    if(store_Products.length <= 0){
+      dispatch(get_store_products(1,12,feedback))
+      }
+  },[])
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar translucent={true} backgroundColor={colors.primary} />

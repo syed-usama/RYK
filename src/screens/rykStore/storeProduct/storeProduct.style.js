@@ -25,10 +25,6 @@ export default StyleSheet.create({
         justifyContent:'center',
         backgroundColor:'white',
       },
-      frame:{
-        width:wp(100),
-        height:hp(30)
-      },
       titleText: {
         fontSize: 20,
         fontWeight:'700',
@@ -37,11 +33,6 @@ export default StyleSheet.create({
       coverImage4:{
           height:hp(30),
           width:wp(100)
-      },
-      imageStyle4:{
-        height:hp(30),
-        width:wp(100),
-        resizeMode: 'stretch'
       },
       row1:{
         marginTop:20,

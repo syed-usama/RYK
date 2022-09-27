@@ -16,7 +16,7 @@ const ProductScreen = ({navigation,route}) => {
   const product = route.params.product;
   const imageUrl = 'https://cdn.mallofryk.com/images/products/'
   const dispatch = useDispatch();
-  const cartDetail = useSelector(state => state.cart.cart);
+  const cartDetail = useSelector(state => state.cart);
   const addCartDetail = cart => {
     let result = cartDetail;
     result.push(cart);

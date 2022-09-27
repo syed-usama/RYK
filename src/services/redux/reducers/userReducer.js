@@ -1,6 +1,10 @@
 const initialState = {
   cart: [],
   storeCart: [],
+  store_products:[],
+  shops:[],
+  food_Products:[],
+  resturants:[],
 };
 const userReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -13,6 +17,16 @@ const userReducer = (state = initialState, action) => {
       return {
         ...state,
         storeCart: action.payload,
+      };
+      case 'Set_Shops':
+      return {
+        ...state,
+        shops: action.payload,
+      };
+      case 'Set_Store_Products':
+      return {
+        ...state,
+        store_products: action.payload,
       };
     default:
       return state;

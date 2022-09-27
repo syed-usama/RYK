@@ -1,21 +1,31 @@
-import React, {useEffect,useState } from 'react';
-import {View, Text, SafeAreaView, Image,ScrollView, StatusBar} from 'react-native';
+import React, {useContext, useEffect,useState } from 'react';
+import {View, Text, SafeAreaView, Image,ScrollView, StatusBar, ActivityIndicator} from 'react-native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import styles from './storeCheckout.style';
 import colors from '../../../assets/colors/colors';
 import {useIsFocused} from '@react-navigation/native';
-import {useSelector} from 'react-redux';
+import { addtoStore } from '../../../services/redux/actions/actions';
+import {useSelector,useDispatch} from 'react-redux';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { TextInput } from 'react-native-paper';
+import { widthPercentageToDP } from 'react-native-responsive-screen';
+import { AuthContext } from '../../../services/firebase/authProvider';
+import { showToast } from '../../../services/toast';
+import axios from 'axios';
 const StoreCheckout = ({navigation}) => {
-  const cartDetail = useSelector(state => state.cart.storeCart);
+  const {user} = useContext(AuthContext);
+  const cartDetail = useSelector(state => state.storeCart);
   const [products, setProducts] = useState(cartDetail);
+  const [userName, setUserName] = useState('');
+  const [userPhone, setUserPhone] = useState('');
   const [street, setStreet] = useState('');
   const [floor, setFloor] = useState('');
   const [optional, setOptional] = useState('');
   const [total, setTotal] = useState(0);
+  const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
   const isFocused = useIsFocused();
   const checkTotal = () => {
     if (products){
@@ -29,12 +39,75 @@ const StoreCheckout = ({navigation}) => {
     setTotal(0);
     }
   }
+  const placeOrder = ()=>{
+    setLoading(true)
+    var checkName = userName.replace(/\s+/g, '');
+        var checkNumber = userPhone.replace(/\s+/g, '');
+        var checkstreet = street.replace(/\s+/g, '');
+        var checkfloor = floor.replace(/\s+/g, '');
+        if(checkName != '' && checkNumber != '' && checkstreet != '' && checkfloor != ''){
+    let cart_products = [];
+    products.forEach(item => {
+      let cartItem = {
+        pro_id : item.pro_id,
+        pro_qty: item.quantity,
+        pro_price: item.pro_new_price,
+        pro_name: item.pro_name
+      }
+      cart_products.push(cartItem);
+    });
+    var data = {
+      ord_name: userName,
+      ord_email: user.email,
+      ord_phone: userPhone,
+      ord_address: street,
+      ord_address2: floor,
+      ord_msg: optional,
+      products: cart_products
+        };
+    console.log(data)
+    axios({
+      url: 'https://mallofryk.com/api/Orders/placeOrder',
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      data: data
+  }).then((response) => {
+    console.log('response',response.data)
+    if(response.data.status == 'ok'){
+      let emptyArray = [];
+      dispatch(addtoStore(emptyArray))
+      setLoading(false);
+      navigation.navigate('Confirmation')
+    }
+  }).catch((e) => {
+      console.log('Place Order Error>>', e)
+  })
+        }else{
+          showToast("Required Fields can't be empty")
+        }
+  
+  }
   useEffect(()=>{
     checkTotal();
   },[isFocused])
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar translucent={true} backgroundColor={colors.primary} />
+      {loading ? (
+        <ActivityIndicator
+          style={{
+            height: 700,
+            width: widthPercentageToDP(100),
+            position: 'absolute',
+            alignSelf: 'center',
+            zIndex: 999,
+          }}
+          color={colors.primary}
+          size={50}
+        />
+      ) : null}
       <View style={styles.header}>
       <AntDesign
             name="close"
@@ -69,13 +142,57 @@ const StoreCheckout = ({navigation}) => {
       <ScrollView>
       <View style={[styles.card,{marginTop:30}]}>
             <View style={styles.cardRow}>
+                <Ionicons name='call' size={20} color={colors.primary} />
+                <Text style={styles.cardTitle}>
+                    Contact Information
+                </Text>
+            </View>
+            <TextInput
+          label={'Full Name *'}
+          onChangeText={value => setUserName(value)}
+          value={userName}
+          mode='outlined'
+          outlineColor='lightgrey'
+          selectionColor='rgba(245, 66, 66,0.5)'
+          style={styles.textInput}
+          theme={{
+            colors: {
+              primary: '#000',
+              underlineColor: '#fff',
+              text: '#000',
+            },
+            roundness: 8,
+          }}
+        />
+        <TextInput
+          onChangeText={value => setUserPhone(value)}
+          value={userPhone}
+          autoCapitalize='none'
+          mode='outlined'
+          label={'Phone Number *'}
+          keyboardType='phone-pad'
+          outlineColor='lightgrey'
+          selectionColor='rgba(245, 66, 66,0.4)'
+          style={styles.textInput}
+          theme={{
+            colors: {
+              primary: '#000',
+              underlineColor: '#fff',
+              text: '#000',
+            },
+            roundness: 8,
+          }}
+        />
+      </View>
+      <View style={[styles.card,{marginTop:30}]}>
+            <View style={styles.cardRow}>
                 <Ionicons name='location-outline' size={22} color={colors.primary} />
                 <Text style={styles.cardTitle}>
                     Delivery address
                 </Text>
             </View>
             <TextInput
-          label={'Street'}
+          label={'Street Address *'}
           onChangeText={value => setStreet(value)}
           value={street}
           autoCapitalize='none'
@@ -97,7 +214,7 @@ const StoreCheckout = ({navigation}) => {
           value={floor}
           autoCapitalize='none'
           mode='outlined'
-          label={'Floor/Unit #'}
+          label={'Floor/Unit # *'}
           outlineColor='lightgrey'
           selectionColor='rgba(245, 66, 66,0.4)'
           style={styles.textInput}
@@ -216,7 +333,8 @@ const StoreCheckout = ({navigation}) => {
               Rs. {total+200}.00
             </Text>
           </View>
-        <TouchableOpacity
+        <TouchableOpacity 
+        onPress={() => placeOrder()}
          style={styles.button2}>
           <Text style={styles.buttonText2}>Place Order</Text>
         </TouchableOpacity>

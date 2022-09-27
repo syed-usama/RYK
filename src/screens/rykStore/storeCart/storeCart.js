@@ -4,12 +4,12 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import styles from './storeCart.style';
 import colors from '../../../assets/colors/colors';
-import { addCart } from '../../../services/redux/actions/actions';
+import { addtoStore } from '../../../services/redux/actions/actions';
 import {useIsFocused} from '@react-navigation/native';
 import {useSelector,useDispatch} from 'react-redux';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 const StoreCart = ({navigation}) => {
-  const cartDetail = useSelector(state => state.cart.storeCart);
+  const cartDetail = useSelector(state => state.storeCart);
   const [products, setProducts] = useState(cartDetail);
   const [total, setTotal] = useState(0);
   const isFocused = useIsFocused();
@@ -37,7 +37,7 @@ const StoreCart = ({navigation}) => {
     });
     setProducts(filtered);
     checkTotal();
-    dispatch(addCart(filtered));
+    dispatch(addtoStore(filtered));
   }
   const checkTotal = () => {
     if (products){

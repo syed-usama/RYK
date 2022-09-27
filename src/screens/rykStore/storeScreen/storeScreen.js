@@ -21,99 +21,42 @@ import {
 import {useIsFocused} from '@react-navigation/native';
 import styles from './storeScreen.style';
 import colors from '../../../assets/colors/colors';
-import {useSelector} from 'react-redux';
+import {useSelector , useDispatch} from 'react-redux';
+import { get_store_products,get_store_shops } from '../../../services/redux/actions/actions';
 import style from '../../../styles/global.style';
-import axios from 'axios';
-import FastImage from 'react-native-fast-image';
 import StoreSwiper from '../../../components/storeSwiper/storeSwiper';
+import StoreProducts from '../../../components/storeProducts/storeProducts';
+import StoreProducts1 from '../../../components/storeProducts1/storeProducts1';
+import StoreShops from '../../../components/storeShops/storeShops';
 const StoreScreen = ({navigation}) => {
-  const cartDetail = useSelector(state => state.cart.storeCart);
+  const dispatch = useDispatch();
+  const cartDetail = useSelector(state => state.storeCart);
+  const store_products = useSelector(state => state.store_products);
+  const store_Shops = useSelector(state => state.shops);
   const [cart, setCart] = useState(cartDetail.length);
   const [loading, setLoading] = useState(false);
   const [restLoader, setRestLoader] = useState(false);
-  const [limit, setLimit] = useState(8);
-  const [plimit, setPLimit] = useState(8);
+  const [limit, setLimit] = useState(10);
+  const [plimit, setPLimit] = useState(12);
   const [refreshing, setRefreshing] = useState(false);
   const isFocused = useIsFocused();
-  const imageUrl = 'https://cdn.mallofryk.com/images/products/';
-  const dummyResturant = require('../../../assets/images/storeDummy.png');
-  const [products, setProducts] = useState([]);
-  const [allProducts, setAllProducts] = useState([]);
+  const [products, setProducts] = useState(store_products);
   const [bottom, setBottom] = useState(false);
-  const [resturants, setResturants] = useState([]);
+  const [resturants, setResturants] = useState(store_Shops);
 
-  const getFoodData = async () => {
-    setLoading(true);
+  const getFoodData = async (new_limit) => {
     setRefreshing(false);
-    let url = 'https://mallofryk.com/api/Items/store/12/1';
-    axios.get(url)
-      .then(response => {
-        //console.log('Products Response>', response.data)
-        //setLoading(false);
-        let data = response.data;
-        if (data.length > 0) {
-          setProducts(data);
-          setLoading(false);
-        }
-      })
-      .catch(error => {
-        console.log('Error>>>', error);
-        setLoading(false);
-      });
+    dispatch(get_store_products(1,new_limit,feedback))
   };
-  const getProducts = async (prlimit) => {
-    setRefreshing(false);
-    let url = 'https://mallofryk.com/api/Items/store/'+prlimit+'/0';
-    axios.get(url)
-      .then(response => {
-        //console.log('Products Response>', response.data)
-        //setLoading(false);
-        let data = response.data;
-        if (data.length > 0) {
-          setAllProducts(data);
-          setLoading(false);
-          setBottom(false)
-        }
-      })
-      .catch(error => {
-        console.log('Error>>>', error);
-        setLoading(false);
-      });
-  };
+  const feedback = (res) =>{
+      setLoading(false);
+      setBottom(false);
+      setRestLoader(false);
+  }
   const getResturantsData = async (rlimit) => {
-    // setLoading(true);
     setRestLoader(true)
-    let url = 'https://mallofryk.com/api/Items/shops/'+rlimit+'/0';
-    axios.get(url)
-      .then(response => {
-        //console.log('Response>', response.data)
-        setResturants(response.data)
-        setRestLoader(false)
-      })
-      .catch(error => {
-        console.log('Error>>>', error);
-        setLoading(false);
-      });
+      dispatch(get_store_shops(1,rlimit,feedback))
   };
-  const setImageLoader = (pro_id ) => {
-    const filtered = products.filter((item) => {
-        if (item.pro_id == pro_id){
-            item.loading = true;
-        }
-        return item;
-    });
-    setProducts(filtered);
-}
-const setImageLoader2 = (pro_id ) => {
-  const filtered = allProducts.filter((item) => {
-      if (item.pro_id == pro_id){
-          item.loading = true;
-      }
-      return item;
-  });
-  setAllProducts(filtered);
-  
-}
 const isCloseToBottom = ({layoutMeasurement, contentOffset, contentSize}) => {
   const paddingToBottom = 20;
   return layoutMeasurement.height + contentOffset.y >=
@@ -122,117 +65,46 @@ const isCloseToBottom = ({layoutMeasurement, contentOffset, contentSize}) => {
 const bottomCall =() =>{
   if(!bottom){
     setBottom(true)
+    getFoodData(plimit+5);
     setPLimit(plimit+5)
-    getProducts(plimit+5)
     console.log('BottomCall')
   }
 }
-
   const onRefresh = () => {
     setRefreshing(true);
-    getFoodData();
-    getProducts(plimit);
+    setLoading(true)
+    getFoodData(plimit);
     getResturantsData(limit);
   };
-  useEffect(() => {
-    getFoodData();
-    getProducts(plimit);
-    getResturantsData(limit);
-  }, []);
   useEffect(() => {
     setCart(cartDetail.length);
     setBottom(false)
   }, [isFocused]);
+  useEffect(() => {
+    console.log('shops',store_Shops.length)
+    console.log('products',store_products.length)
+    if(products.length <= 0){
+      onRefresh();
+    }
+  }, []);
+  useEffect(() => {
+    console.log('data updated')
+    setProducts(store_products)
+    setResturants(store_Shops)
+  }, [store_products,store_Shops]);
   const renderProducts = ({ item }) => {
     return (
-      <TouchableOpacity
-                  key={item.pro_id}
-                  style={styles.favourite}
-                  onPress={() =>
-                    navigation.navigate('StoreProduct', {product: item})
-                  }>
-                  <FastImage
-                    style={styles.itemImage}
-                    resizeMode="stretch"
-                    source={item.loading ? {uri: imageUrl + item.url} : require('../../../assets/images/gify.gif')}
-                    onLoad={() => setImageLoader(item.pro_id)}
-                  />
-                  <Text numberOfLines={1} style={styles.itemText}>
-                    {item.pro_name}
-                  </Text>
-                  <Text style={styles.itemText1}>
-                    Rs: {item.pro_new_price}
-                  </Text>
-                </TouchableOpacity>
+      <StoreProducts navigation={navigation} item={item} />
     )
     }
     const renderAllProducts = ({ item }) => {
       return (
-        <TouchableOpacity
-                    key={item.pro_id}
-                    style={styles.favourite1}
-                    onPress={() =>
-                      navigation.navigate('StoreProduct', {product: item})
-                    }>
-                    <FastImage
-                      style={styles.itemImage1}
-                      resizeMode="stretch"
-                      source={item.loading ? {uri: imageUrl + item.url} : require('../../../assets/images/gify.gif')}
-                      onLoad={() => setImageLoader2(item.pro_id)}
-                    />
-                    <Text numberOfLines={1} style={styles.itemText}>
-                      {item.pro_name}
-                    </Text>
-                    <Text style={styles.itemText1}>
-                      Rs: {item.pro_new_price}
-                    </Text>
-                  </TouchableOpacity>
+        <StoreProducts1 navigation={navigation} item={item} />
       )
       }
     const renderResturants = ({ item,index }) => {
       return (
-        <TouchableOpacity
-                  onPress={() =>
-                    navigation.navigate('ShopScreen', {
-                      resturant: item,
-                    })
-                  }
-                  style={{
-                    width: 250,
-                    backgroundColor: 'white',
-                    borderRadius: 15,
-                    marginLeft: 15,
-                    marginVertical: 5,
-                    elevation: 5,
-                  }}>
-                  <View style={{flex: 3}}>
-                  <FastImage
-                      style={{
-                        width: 250,
-                        height: 140,
-                        borderTopRightRadius: 15,
-                        borderTopLeftRadius: 15,
-                      }}
-                      source={item.sho_image ?{uri: imageUrl + item.sho_image} : dummyResturant}
-                    />
-                  </View>
-                  <View style={{flex: 1, paddingLeft: 5}}>
-                    <Text
-                    numberOfLines={1}
-                      style={{
-                        fontSize: 16,
-                        fontWeight: '700',
-                        color: colors.secondary,
-                      }}>
-                      {item.sho_name}
-                    </Text>
-                    <Text
-                    numberOfLines={1}
-                     style={{fontSize: 12, color: colors.secondary}}>
-                      {item.sho_location}
-                    </Text>
-                  </View>
-                </TouchableOpacity>
+        <StoreShops navigation={navigation} item={item} />
       )
       }
   return (
@@ -326,7 +198,7 @@ const bottomCall =() =>{
           </View>
           <View style={{ paddingLeft: 10}}>
               <FlatList
-                  data={products}
+                  data={products.slice(3, 10)}
                   showsHorizontalScrollIndicator={false}
                   horizontal={true}
                   renderItem={renderProducts}
@@ -395,14 +267,6 @@ const bottomCall =() =>{
                   renderItem={renderProducts}
               />
           </View>
-          {/* <View style={{ paddingLeft: 10}}>
-              <FlatList
-                  data={products.slice(12, 18)}
-                  showsHorizontalScrollIndicator={false}
-                  horizontal={true}
-                  renderItem={renderProducts}
-              />
-          </View> */}
         </View>
         <View >
           <View style={{paddingLeft: 20}}>
@@ -426,7 +290,7 @@ const bottomCall =() =>{
           </View>
           <View style={{ paddingLeft: 10}}>
               <FlatList
-                  data={allProducts}
+                  data={products}
                   numColumns={2}
                   showsVerticalScrollIndicator={false}
                   renderItem={renderAllProducts}

@@ -27,7 +27,7 @@ import style from '../../../styles/global.style';
 import axios from 'axios';
 import FastImage from 'react-native-fast-image';
 const FoodScreen = ({navigation}) => {
-  const cartDetail = useSelector(state => state.cart.cart);
+  const cartDetail = useSelector(state => state.cart);
   const [cart, setCart] = useState(cartDetail.length);
   const [loading, setLoading] = useState(false);
   const [restLoader, setRestLoader] = useState(false);

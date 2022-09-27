@@ -9,7 +9,7 @@ import {useIsFocused} from '@react-navigation/native';
 import {useSelector,useDispatch} from 'react-redux';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 const CartScreen = ({navigation}) => {
-  const cartDetail = useSelector(state => state.cart.cart);
+  const cartDetail = useSelector(state => state.cart);
   const [products, setProducts] = useState(cartDetail);
   const [total, setTotal] = useState(0);
   const isFocused = useIsFocused();

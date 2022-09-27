@@ -31,7 +31,7 @@ import { heightPercentageToDP } from 'react-native-responsive-screen';
 const ResturantScreen = ({navigation,route}) => {
   const resturant = route.params.resturant;
   const dispatch = useDispatch();
-  const cartDetail = useSelector(state => state.cart.cart);
+  const cartDetail = useSelector(state => state.cart);
   const addCartDetail = cart => {
     let result = cartDetail;
     result.push(cart);

@@ -10,7 +10,7 @@ import {useSelector} from 'react-redux';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { TextInput } from 'react-native-paper';
 const CheckoutScreen = ({navigation}) => {
-  const cartDetail = useSelector(state => state.cart.cart);
+  const cartDetail = useSelector(state => state.cart);
   const [products, setProducts] = useState(cartDetail);
   const [street, setStreet] = useState('');
   const [floor, setFloor] = useState('');

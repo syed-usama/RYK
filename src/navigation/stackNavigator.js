@@ -3,16 +3,15 @@ import { createStackNavigator } from "@react-navigation/stack";
 import SplashScreen from "../screens/splashScreen/splashScreen";
 import LoginScreen from "../screens/loginScreen/loginScreen";
 import SignupScreen from "../screens/signupScreen/signupScreen";
-import FoodScreen from "../screens/rykfoods/foodScreen/foodScreen";
 import CartScreen from "../screens/rykfoods/cartScreen/cartScreen";
 import ProductScreen from "../screens/rykfoods/productScreen/productScreen";
 import ResturantScreen from "../screens/rykfoods/resturantScreen/resturantScreen";
 import CheckoutScreen from "../screens/rykfoods/checkoutScreen/checkoutScreen";
-import StoreScreen from "../screens/rykStore/storeScreen/storeScreen";
 import StoreCart from "../screens/rykStore/storeCart/storeCart";
 import StoreProduct from "../screens/rykStore/storeProduct/storeProduct";
 import ShopScreen from "../screens/rykStore/shopScreen/shopScreen";
 import StoreCheckout from "../screens/rykStore/storeCheckout/storeCheckout";
+import Confirmation from "../screens/rykStore/confirmation/confirmation";
 import { CourierDrawer, FoodDrawer, StoreDrawer } from "./drawerNavigator";
 import HomeScreen from "../screens/homeScreen/homeScreen";
 import ComingSoon from "../screens/comingSoon/comingSoon";
@@ -60,6 +59,7 @@ const StoreStackNavigator = () => {
        <Stack.Screen name="StoreCheckout" component={StoreCheckout} />
        <Stack.Screen name="StoreProduct" component={StoreProduct} />
        <Stack.Screen name="ShopScreen" component={ShopScreen} />
+       <Stack.Screen name="Confirmation" component={Confirmation} />
     </Stack.Navigator>
   );
 }
