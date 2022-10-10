@@ -7,6 +7,7 @@ import colors from '../../assets/colors/colors';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import {useSelector , useDispatch} from 'react-redux';
 import { get_store_products,get_store_shops } from '../../services/redux/actions/actions';
+import { sendNotification } from '../../services/sendNotification';
 const HomeScreen = ({navigation}) => {
   const store_Shops = useSelector(state => state.shops);
   const store_Products = useSelector(state => state.store_products);
@@ -43,7 +44,10 @@ const HomeScreen = ({navigation}) => {
           <Text style={styles.description}>Get one step ahead of your competition and reach your customers with the strength of the ""RYK Couriers"" global network.</Text>
           </View>
       <View style={styles.body}>
-      <TouchableOpacity style={styles.button1} onPress={() => navigation.navigate('FoodDrawer')}>
+      <TouchableOpacity style={styles.button1} onPress={() => {
+        // sendNotification('3','usama','New Order',"You have a new order",'new order')
+        navigation.navigate('FoodDrawer')
+        }}>
         <Text style={styles.buttonText1}>RYK Foodies</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={() => navigation.navigate('CourierDrawer')}>

@@ -28,16 +28,17 @@ const ProductSwiper = ({navigation, images}) => {
           <TouchableOpacity key={image} onPress={() => setImageModal(true)}>
             <ImageBackground
               style={styles.imageStyle4}
+              resizeMode='stretch'
               source={
                 imageLoading
                   ? {uri: imageUrl + image.url}
                   : require('../../assets/images/gify.gif')
               }
               onLoad={() => setImageLoading(true)}>
-              <Image
+              {/* <Image
                 source={require('../../assets/images/frame.png')}
                 style={styles.frame}
-              />
+              /> */}
             </ImageBackground>
           </TouchableOpacity>
         ))}
@@ -52,6 +53,7 @@ const ProductSwiper = ({navigation, images}) => {
             <TouchableOpacity key={image} activeOpacity={1}>
               <ImageBackground
                 style={styles.imageStyle1}
+                resizeMode='contain'
                 source={
                   imageLoading
                     ? {uri: imageUrl + image.url}

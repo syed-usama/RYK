@@ -62,6 +62,17 @@ export function FoodDrawerContent(props) {
                             />
                             <DrawerItem 
                                 icon={({color, size}) => (
+                                    <Icon 
+                                    name="account-outline" 
+                                    color={color}
+                                    size={size}
+                                    />
+                                )}
+                                label="Orders"
+                                onPress={() => {props.navigation.navigate('FoodOrders')}}
+                            />
+                            <DrawerItem 
+                                icon={({color, size}) => (
                                     <Iconn 
                                     name="settings-sharp" 
                                     color={color}

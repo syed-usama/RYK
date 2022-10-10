@@ -15,6 +15,8 @@ import Confirmation from "../screens/rykStore/confirmation/confirmation";
 import { CourierDrawer, FoodDrawer, StoreDrawer } from "./drawerNavigator";
 import HomeScreen from "../screens/homeScreen/homeScreen";
 import ComingSoon from "../screens/comingSoon/comingSoon";
+import FoodConfirmation from "../screens/rykfoods/FoodConfirmation/foodConfirmation";
+import FoodOrders from "../screens/rykfoods/foodOrders/foodOrders";
 
 
 const Stack = createStackNavigator();
@@ -47,6 +49,8 @@ const FoodStackNavigator = () => {
        <Stack.Screen name="CheckoutScreen" component={CheckoutScreen} />
        <Stack.Screen name="ProductScreen" component={ProductScreen} />
        <Stack.Screen name="ResturantScreen" component={ResturantScreen} />
+       <Stack.Screen name="FoodConfirmation" component={FoodConfirmation} />
+       <Stack.Screen name="FoodOrders" component={FoodOrders} />
     </Stack.Navigator>
   );
 }

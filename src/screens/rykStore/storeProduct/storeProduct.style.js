@@ -4,7 +4,7 @@ import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-nativ
 export default StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: 'white',
+        backgroundColor: 'rgba(0,0,0,0.1)',
       },
       header:{
         height: 50,
@@ -31,11 +31,18 @@ export default StyleSheet.create({
         color:colors.secondary
       },
       coverImage4:{
-          height:hp(30),
+          height:hp(45),
           width:wp(100)
       },
+      body:{
+        margin:10,
+        borderRadius:10,
+        backgroundColor:'white'
+      },
+      body1:{
+        marginVertical:20,
+      },
       row1:{
-        marginTop:20,
           flexDirection:'row',
       justifyContent:'space-between',
       paddingHorizontal:15,
@@ -43,21 +50,21 @@ export default StyleSheet.create({
     },
       title:{
         width:wp(80),
-        fontSize: 22,
-        fontWeight:'500',
+        fontSize: 17,
+        fontWeight:'600',
         color:colors.black
       },
       description:{
-          marginTop:20,
+          marginTop:10,
         fontSize: 14,
         fontWeight:'400',
         color:'grey',
         marginHorizontal:15
       },
       price:{
-        marginTop:18,
-        fontSize: 20,
-        fontWeight:'600',
+        marginTop:10,
+        fontSize: 22,
+        fontWeight:'800',
         color:'black',
         marginHorizontal:15
       },
@@ -74,8 +81,14 @@ export default StyleSheet.create({
         fontWeight:'500',
         color:colors.white
       },
+      ratingText:{
+        marginLeft:3,
+        textAlignVertical:'center',
+        fontSize: 14,
+        color:colors.black,
+      },
       instructionTitle:{
-        marginTop:50,
+        marginTop:40,
         fontSize: 20,
         fontWeight:'600',
         color:colors.black,
@@ -99,8 +112,9 @@ row:{
   height:hp(10),
   flexDirection:'row',
   justifyContent:'space-between',
-  marginHorizontal:10,
-  alignItems:'center'
+  paddingHorizontal:10,
+  alignItems:'center',
+  backgroundColor:'white'
 },
 row2:{
   flexDirection:'row',

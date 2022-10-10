@@ -42,7 +42,7 @@ const ResturantScreen = ({navigation,route}) => {
   const [imageLoading, setImageLoading] = useState(false);
   const [cart, setCart] = useState(cartDetail.length);
   const dummyResturant = require('../../../assets/images/resturantDummy.png')
-  const imageUrl = 'https://mallofryk.com/admin/assets/pro_img/';
+  const imageUrl = 'https://cdn.mallofryk.com/images/products/';
   const [loading, setLoading] = useState(true);
   const [products, setProducts] = useState([])
   const getFoodData = async () => {
@@ -50,7 +50,7 @@ const ResturantScreen = ({navigation,route}) => {
     let url = 'https://mallofryk.com/api/Items/Resfoodies/50/0/'+route.params.resturant.sho_id;
     axios.get(url)
       .then(response => {
-        //console.log('Products Response>', response.data)
+        console.log('Products Response>', response.data[0].images)
         console.log('Resturant')
         let data = response.data;
         if (data.length > 0) {
@@ -71,7 +71,7 @@ const ResturantScreen = ({navigation,route}) => {
     let url = 'https://mallofryk.com/api/Items/resturantsCat/'+route.params.resturant.sho_id;
     axios.get(url)
       .then(async response => {
-        //console.log('Products Response>', response.data)
+        // console.log('Products Response>', response.data)
         let data = response.data;
         if (data.length > 0) {
           let sections = [];
@@ -105,6 +105,7 @@ const ResturantScreen = ({navigation,route}) => {
 
   const [sections ,setSections] = useState([]);
   useEffect(() => {
+    // console.log('Resturant',resturant)
     getFoodData()
   }, []);
   const setQuantity = (id,quantity) =>{

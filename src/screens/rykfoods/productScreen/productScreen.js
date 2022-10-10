@@ -1,5 +1,5 @@
 import React, {useEffect,useState } from 'react';
-import {View, Text, SafeAreaView, Image,BackHandler,StatusBar, ImageBackground} from 'react-native';
+import {View, Text, SafeAreaView, Image,BackHandler,StatusBar, ImageBackground, Alert} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -12,16 +12,26 @@ import { ScrollView, TextInput, TouchableOpacity } from 'react-native-gesture-ha
 import style from '../../../styles/global.style';
 import { heightPercentageToDP } from 'react-native-responsive-screen';
 import { showToast } from '../../../services/toast';
+import { useIsFocused } from '@react-navigation/native';
 const ProductScreen = ({navigation,route}) => {
-  const product = route.params.product;
-  const imageUrl = 'https://cdn.mallofryk.com/images/products/'
-  const dispatch = useDispatch();
   const cartDetail = useSelector(state => state.cart);
+  const dispatch = useDispatch();
+  const product = route.params.product;
+  const [favourite , setFavourite] = useState(false);
+  const [imageLoading , setImageLoading] = useState(false);
+  const [quantity , setQuantity] = useState(1);
+  const [cart, setCart] = useState(cartDetail.length);
+  const isFocused = useIsFocused();
+  const imageUrl = 'https://cdn.mallofryk.com/images/products/'
+  
+  
+
+
   const addCartDetail = cart => {
     let result = cartDetail;
     result.push(cart);
     dispatch(addCart(result));
-    setCart(cartDetail.length)
+    setCart(result.length)
   };
   const pushCart =()=>{
     var cart = {
@@ -29,36 +39,41 @@ const ProductScreen = ({navigation,route}) => {
       url: product.url,
       pro_name: product.pro_name,
       pro_new_price: product.pro_new_price,
-      quantity:quantity
+      quantity:quantity,
+      sho_id: product.sho_id,
     }
     addCartDetail(cart);
   }
-  const [favourite , setFavourite] = useState(false);
-  const [imageLoading , setImageLoading] = useState(false);
-  const [quantity , setQuantity] = useState(1);
-  const [cart, setCart] = useState(cartDetail.length);
-//   useEffect(() => {
-//     const backAction = () => {
-//       navigation.navigate('FoodScreen')
-//       return true;
-//     };
-//   const backHandler = BackHandler.addEventListener(
-//     "hardwareBackPress",
-//     backAction
-//   );
-
-//   return () => backHandler.remove();
-// }, []);
 const checkDuplicate = (cart) => {
   var flag = false;
+  var flag1 = false;
   const filtered = cartDetail.filter(item =>{
     if (item.pro_id == cart.pro_id){
       flag = true;
       item.quantity = item.quantity + quantity;
     }
+    if(item.sho_id != cart.sho_id){
+      flag1 = true;
+    }
     return item;
   });
-  if (flag){
+  if(flag1){
+    Alert.alert(
+      "Remove your previous items?",
+      "You still have products from another resturant. Shall we start over with a fresh cart?",
+      [
+        {
+          text: "No",
+          onPress: () => console.log("Cancel Pressed"),
+          style: "cancel"
+        },
+        { text: "Remove", onPress: () => {
+          remove();
+          
+        } }
+      ]
+    );
+  }else if (flag){
     dispatch(addCart(filtered));
     showToast('Added to Cart.')
   }else{
@@ -66,6 +81,26 @@ const checkDuplicate = (cart) => {
     showToast('Added to Cart.')
   }
 }
+const remove = async()=>{
+  let emptyArray = [];
+  dispatch(addCart(emptyArray))
+  var cart = {
+    pro_id :product.pro_id,
+    url: product.url,
+    pro_name: product.pro_name,
+    pro_new_price: product.pro_new_price,
+    quantity:quantity,
+    sho_id: product.sho_id,
+  }
+  let result = [];
+    result.push(cart);
+    dispatch(addCart(result));
+    setCart(result.length)
+}
+useEffect(() => {
+  console.log('cart',cartDetail)
+  setCart(cartDetail.length);
+}, [isFocused]);
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar translucent={true} backgroundColor='transparent' />
@@ -86,7 +121,7 @@ const checkDuplicate = (cart) => {
       <View style={styles.coverImage4}>
         <ImageBackground
           style={styles.imageStyle4}
-          source={imageLoading ?{uri: imageUrl+product.url} : require('../../../assets/images/gify.gif') } onLoad={() => setImageLoading(true)}>
+          source={imageLoading ?{uri: product.images ? imageUrl+product.images[0].url: imageUrl+product.url} : require('../../../assets/images/gify.gif') } onLoad={() => setImageLoading(true)}>
           <Image source={require('../../../assets/images/frame.png')} style={styles.frame} />
         </ImageBackground>
       </View>

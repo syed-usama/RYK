@@ -15,17 +15,16 @@ export default StyleSheet.create({
         margin:20,
       },
     imageStyle4:{
-        height:hp(30),
+        height:hp(45),
         width:wp(100),
-        resizeMode: 'stretch'
       },
       imageStyle1:{
         height:hp(100),
         width:wp(100),
-        resizeMode: 'cover'
+        backgroundColor:'white'
       },
       frame:{
         width:wp(100),
-        height:hp(30)
+        height:hp(45)
       },
 });
