@@ -22,12 +22,16 @@ import {useIsFocused} from '@react-navigation/native';
 import styles from './foodScreen.style';
 import colors from '../../../assets/colors/colors';
 import FoodSwiper from '../../../components/foodSwiper/foodSwiper';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import style from '../../../styles/global.style';
 import axios from 'axios';
 import FastImage from 'react-native-fast-image';
+import { get_food_products, get_food_shops } from '../../../services/redux/actions/actions';
 const FoodScreen = ({navigation}) => {
+  const dispatch = useDispatch();
   const cartDetail = useSelector(state => state.cart);
+  const food_products = useSelector(state => state.food_products);
+  const food_shops = useSelector(state => state.food_shops);
   const [cart, setCart] = useState(cartDetail.length);
   const [loading, setLoading] = useState(false);
   const [restLoader, setRestLoader] = useState(false);
@@ -36,42 +40,20 @@ const FoodScreen = ({navigation}) => {
   const isFocused = useIsFocused();
   const imageUrl = 'https://cdn.mallofryk.com/images/products/';
   const dummyResturant = require('../../../assets/images/resturantDummy.png');
-  const [products, setProducts] = useState([]);
-  const [resturants, setResturants] = useState([]);
+  const [products, setProducts] = useState(food_products);
+  const [resturants, setResturants] = useState(food_shops);
 
   const getFoodData = async () => {
-    setLoading(true);
     setRefreshing(false);
-    let url = 'https://mallofryk.com/api/Items/foodies/18/18';
-    axios.get(url)
-      .then(response => {
-        //console.log('Products Response>', response.data)
-        //setLoading(false);
-        let data = response.data;
-        if (data.length > 0) {
-          setProducts(data);
-          setLoading(false);
-        }
-      })
-      .catch(error => {
-        console.log('Error>>>', error);
-        setLoading(false);
-      });
+    dispatch(get_food_products(feedback))
   };
+  const feedback = (res) =>{
+    setLoading(false);
+    setRestLoader(false);
+}
   const getResturantsData = async (rlimit) => {
-    // setLoading(true);
     setRestLoader(true)
-    let url = 'https://mallofryk.com/api/Items/resturants/'+rlimit+'/0';
-    axios.get(url)
-      .then(response => {
-        //console.log('Response>', response.data)
-        setResturants(response.data)
-        setRestLoader(false)
-      })
-      .catch(error => {
-        console.log('Error>>>', error);
-        setLoading(false);
-      });
+      dispatch(get_food_shops(rlimit,feedback))
   };
   const setImageLoader = (pro_id ) => {
     const filtered = products.filter((item) => {
@@ -84,13 +66,25 @@ const FoodScreen = ({navigation}) => {
 }
   const onRefresh = () => {
     setRefreshing(true);
+    setLoading(true);
     getFoodData();
     getResturantsData(limit);
   };
   useEffect(() => {
-    getFoodData();
-    getResturantsData(limit);
+    console.log('products length:',food_products.length)
+    if(products.length <= 0){
+      onRefresh();
+    }
   }, []);
+  useEffect(() => {
+    console.log('data updated')
+    setProducts(food_products)
+    setResturants(food_shops)
+  }, [food_products,food_shops]);
+  // useEffect(() => {
+  //   getFoodData();
+  //   getResturantsData(limit);
+  // }, []);
   useEffect(() => {
     setCart(cartDetail.length);
   }, [isFocused]);
@@ -112,7 +106,7 @@ const FoodScreen = ({navigation}) => {
                     {item.pro_name}
                   </Text>
                   <Text style={styles.itemText1}>
-                    Rs: {item.pro_new_price}
+                    {item.variations.length>0 ? item.variations[0].price != '' ? 'Rs: '+item.variations[0].price : 'yet to update' : 'yet to update'}
                   </Text>
                 </TouchableOpacity>
     )

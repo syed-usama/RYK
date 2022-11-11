@@ -4,7 +4,7 @@ import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-nativ
 export default StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: 'white',
+        backgroundColor: 'rgba(0,0,0,0.1)',
       },
       header:{
         height: 50,
@@ -43,6 +43,14 @@ export default StyleSheet.create({
         width:wp(100),
         resizeMode: 'stretch'
       },
+      body:{
+        margin:10,
+        borderRadius:10,
+        backgroundColor:'white'
+      },
+      body1:{
+        marginVertical:20,
+      },
       row1:{
         marginTop:20,
           flexDirection:'row',
@@ -51,8 +59,8 @@ export default StyleSheet.create({
       alignItems:'center',
     },
       title:{
-        fontSize: 22,
-        fontWeight:'500',
+        fontSize: 18,
+        fontWeight:'600',
         color:colors.black
       },
       description:{
@@ -63,12 +71,53 @@ export default StyleSheet.create({
         marginHorizontal:15
       },
       price:{
-        marginTop:18,
-        fontSize: 20,
-        fontWeight:'600',
+        marginTop:15,
+        fontSize: 22,
+        fontWeight:'800',
         color:'black',
         marginHorizontal:15
       },
+      variationsTitle:{
+        marginTop:20,
+        fontSize: 20,
+        fontWeight:'600',
+        color:colors.black,
+        marginHorizontal:15,
+      },
+      variationsRow:{
+        paddingVertical:10,
+        paddingHorizontal:20,
+        flexDirection:'row',
+        alignItems:'center',
+        justifyContent:'space-between'
+    },
+    circle:{
+      height:20,
+      width:20,
+      borderColor:colors.secondary,
+      borderWidth:1,
+      backgroundColor: 'rgba(0,0,0,0.2)',
+      borderRadius:10,
+      justifyContent:'center',
+      alignItems:'center'
+    },
+    innerCircle:{
+      height:6,
+      width:6,
+      backgroundColor: 'rgba(255,255,255,1)',
+      borderRadius:3
+    },
+    variationName:{
+      fontSize: 14,
+        fontWeight:'400',
+        color:'black',
+        marginHorizontal:15,
+    },
+    variationPrice:{
+      fontSize: 14,
+        fontWeight:'600',
+        color:'black',
+    },
       button:{
           height:40,
           width:wp(50),
@@ -83,7 +132,7 @@ export default StyleSheet.create({
         color:colors.white
       },
       instructionTitle:{
-        marginTop:50,
+        marginTop:30,
         fontSize: 20,
         fontWeight:'600',
         color:colors.black,
@@ -107,8 +156,9 @@ row:{
   height:hp(10),
   flexDirection:'row',
   justifyContent:'space-between',
-  marginHorizontal:10,
-  alignItems:'center'
+  paddingHorizontal:10,
+  alignItems:'center',
+  backgroundColor:'white'
 },
 row2:{
   flexDirection:'row',

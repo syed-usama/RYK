@@ -50,7 +50,7 @@ const ResturantScreen = ({navigation,route}) => {
     let url = 'https://mallofryk.com/api/Items/Resfoodies/50/0/'+route.params.resturant.sho_id;
     axios.get(url)
       .then(response => {
-        console.log('Products Response>', response.data[0].images)
+        // console.log('Products Response>', response.data[1].variations)
         console.log('Resturant')
         let data = response.data;
         if (data.length > 0) {
@@ -246,12 +246,14 @@ const ResturantScreen = ({navigation,route}) => {
               <TouchableOpacity style={styles.itemSection} onPress={()=> navigation.navigate('ProductScreen', {product: item})}>
           <View>
             <Text style={styles.title}>{item.pro_name}</Text>
-            <Text style={styles.Price}>Rs. {item.pro_new_price} /-</Text>
+            <Text style={styles.Price}>
+              {item.variations.length>0 ? item.variations[0].price != '' ? 'Rs. '+item.variations[0].price+ '/-' : 'yet to update' : 'yet to update'}
+              </Text>
           </View>
           <View style={styles.imageView}>
           <FastImage
               style={styles.image}
-              source={{uri: imageUrl+item.url}}
+              source={{uri: imageUrl+item.images[0].url}}
             />
           </View>
         </TouchableOpacity>

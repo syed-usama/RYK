@@ -4,7 +4,8 @@ import LinearGradient from 'react-native-linear-gradient';
 import {SafeAreaView, Text, View, Image, TouchableOpacity} from 'react-native';
 import colors from '../../../assets/colors/colors';
 
-const FoodConfirmation = ({navigation}) => {
+const FoodConfirmation = ({navigation,route}) => {
+  const rid = route.params.rid;
   return (
     <SafeAreaView style={styles.container}>
         <View style={styles.header}>
@@ -20,8 +21,9 @@ const FoodConfirmation = ({navigation}) => {
         colors={[colors.primary,colors.primary]}
         style={styles.linearGradient}>
         <View style={styles.body}>
-            <Text style={styles.bodytext}>Your order is</Text>
-            <Text style={styles.bodytext}>placed Successfully</Text>
+            <Text style={styles.bodytext}>Your order</Text>
+            <Text style={styles.bodytext}>{rid}</Text>
+            <Text style={styles.bodytext}>is placed Successfully</Text>
         </View>
         <View style={{marginBottom:10}}>
         <TouchableOpacity
