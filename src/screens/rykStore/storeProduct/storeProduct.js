@@ -8,7 +8,7 @@ import {
   StatusBar,
   ImageBackground,
 } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import Entypo from 'react-native-vector-icons/Entypo';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
@@ -71,6 +71,7 @@ const StoreProduct = ({navigation, route}) => {
     }
   };
   useEffect(() => {
+    console.log('product:',product);
     setCart(cartDetail.length);
   }, [isFocused]);
   return (
@@ -120,6 +121,10 @@ const StoreProduct = ({navigation, route}) => {
             )}
           </View>
           <Text style={styles.price}><Text style={[styles.price,{fontSize:16}]}>Rs. </Text>{product.pro_new_price}.00</Text>
+          <View style={{flexDirection:'row',paddingHorizontal:13,paddingTop:10}}>
+            <Entypo name="shop" size={20} color={colors.primary}/>
+            <Text style={styles.shop}>{product.sho_id}</Text>
+          </View>
           <View style={{flexDirection:'row',paddingHorizontal:10,paddingTop:10}}>
           <AirbnbRating
           defaultRating={4}
@@ -132,8 +137,7 @@ const StoreProduct = ({navigation, route}) => {
         <Text style={styles.ratingText}>8 ratings</Text>
         </View>
           <Text style={styles.description}>
-            Here is Product Description Here is Product Description.Here is
-            Product Description.Here is Product Description
+          {product.pro_short_description}
           </Text>
           <Text style={styles.instructionTitle}>Special instructions</Text>
           <Text style={styles.instructionDescription}>

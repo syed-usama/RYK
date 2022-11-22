@@ -9,7 +9,7 @@ import {
   ImageBackground,
   Alert,
 } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import Entypo from 'react-native-vector-icons/Entypo';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
@@ -188,6 +188,10 @@ const ProductScreen = ({navigation, route}) => {
             )}
           </View>
           <Text style={styles.price}>Rs. {selectedVar.price}.00</Text>
+          <View style={{flexDirection:'row',paddingHorizontal:13,paddingTop:10}}>
+            <Entypo name="shop" size={20} color={colors.primary}/>
+            <Text style={styles.shop}>{product.sho_id}</Text>
+          </View>
           
           <Text style={styles.description}>
             {product.pro_short_description}

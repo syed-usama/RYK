@@ -214,7 +214,7 @@ const bottomCall =() =>{
                 color: colors.secondary,
                 marginTop: 7,
               }}>
-              Brands
+              Stores & Brands
             </Text>
           </View>
           <View style={{flex: 5, flexDirection: 'row'}}>

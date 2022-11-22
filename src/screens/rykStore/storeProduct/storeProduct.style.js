@@ -68,6 +68,12 @@ export default StyleSheet.create({
         color:'black',
         marginHorizontal:15
       },
+      shop:{
+        marginLeft:10,
+        fontSize: 14,
+        fontWeight:'500',
+        color:'black',
+      },
       button:{
           height:40,
           width:wp(50),

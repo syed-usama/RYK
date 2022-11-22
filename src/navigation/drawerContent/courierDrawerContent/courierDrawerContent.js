@@ -58,6 +58,7 @@ export function CourierDrawerContent(props) {
                                     />
                                 )}
                                 label="Track Shipments"
+                                onPress={() => {props.navigation.navigate('TrackingScreen')}}
                                 
                             />
                             <DrawerItem 
@@ -69,6 +70,7 @@ export function CourierDrawerContent(props) {
                                     />
                                 )}
                                 label="Get Rates"
+                                onPress={() => {props.navigation.navigate('RateScreen')}}
                                 
                             />
                             <DrawerItem 
@@ -80,6 +82,7 @@ export function CourierDrawerContent(props) {
                                     />
                                 )}
                                 label="Pick Up"
+                                onPress={() => {props.navigation.navigate('PickupScreen')}}
                                 
                             />
                             <DrawerItem 
@@ -91,6 +94,7 @@ export function CourierDrawerContent(props) {
                                     />
                                 )}
                                 label="Find Us"
+                                onPress={() => {props.navigation.navigate('FindusScreen')}}
                                 
                             />
                         </Drawer.Section>

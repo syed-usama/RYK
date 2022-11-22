@@ -77,6 +77,12 @@ export default StyleSheet.create({
         color:'black',
         marginHorizontal:15
       },
+      shop:{
+        marginLeft:10,
+        fontSize: 14,
+        fontWeight:'500',
+        color:'black',
+      },
       variationsTitle:{
         marginTop:20,
         fontSize: 20,

@@ -157,6 +157,53 @@ const FoodScreen = ({navigation}) => {
                 </TouchableOpacity>
       )
       }
+      const renderResturants2 = ({ item,index }) => {
+        return (
+          <TouchableOpacity
+                    onPress={() =>
+                      navigation.navigate('ResturantScreen', {
+                        resturant: item,
+                      })
+                    }
+                    style={{
+                      width: widthPercentageToDP(94),
+                      backgroundColor: 'white',
+                      borderRadius: 15,
+                      alignSelf:'center',
+                      marginVertical: 5,
+                      elevation: 5,
+                      paddingBottom:5,
+                    }}>
+                    <View style={{flex: 3}}>
+                    <FastImage
+                        style={{
+                          width: widthPercentageToDP(94),
+                          height: hp(24),
+                          borderTopRightRadius: 15,
+                          borderTopLeftRadius: 15,
+                        }}
+                        source={item.sho_image ?{uri: imageUrl + item.sho_image} : dummyResturant}
+                      />
+                    </View>
+                    <View style={{flex: 1, paddingLeft: 10}}>
+                      <Text
+                      numberOfLines={1}
+                        style={{
+                          fontSize: 16,
+                          fontWeight: '700',
+                          color: colors.secondary,
+                        }}>
+                        {item.sho_name}
+                      </Text>
+                      <Text
+                      numberOfLines={1}
+                       style={{fontSize: 12, color: colors.secondary}}>
+                        {item.sho_location}
+                      </Text>
+                    </View>
+                  </TouchableOpacity>
+        )
+        }
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar translucent={true} backgroundColor={colors.primary} />
@@ -265,7 +312,7 @@ const FoodScreen = ({navigation}) => {
               horizontal={true}
               showsHorizontalScrollIndicator={false}>
               <FlatList
-                  data={resturants}
+                  data={resturants.slice(0,4)}
                   showsHorizontalScrollIndicator={false}
                   horizontal={true}
                   ListFooterComponent={
@@ -292,7 +339,7 @@ const FoodScreen = ({navigation}) => {
                 marginTop: 5,
                 marginBottom: 5,
               }}>
-              Summer <Text
+              Best <Text
               style={{
                 fontSize: 20,
                 fontWeight: '700',
@@ -319,6 +366,11 @@ const FoodScreen = ({navigation}) => {
               />
           </View>
         </View>
+        <FlatList
+                  data={resturants.slice(4,8)}
+                  showsVerticalScrollIndicator={false}
+                  renderItem={renderResturants2}
+              />
         {/* </ImageBackground> */}
         <View style={{height: 30}}></View>
       </ScrollView>

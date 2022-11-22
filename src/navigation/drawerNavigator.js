@@ -1,7 +1,7 @@
 import React from "react";
 
 import { createDrawerNavigator } from "@react-navigation/drawer";
-import CourierScreen from "../screens/courierScreen/courierScreen";
+import CourierScreen from "../screens/courierScreen/courierHome/courierScreen";
 import { FoodDrawerContent } from "./drawerContent/foodDrawerContent/foodDrawerContent";
 import { StoreDrawerContent } from "./drawerContent/storeDrawerContent/storeDrawerContent";
 import { CourierDrawerContent } from "./drawerContent/courierDrawerContent/courierDrawerContent";

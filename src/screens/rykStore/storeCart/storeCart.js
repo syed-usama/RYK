@@ -92,8 +92,8 @@ const StoreCart = ({navigation}) => {
       {products.length == 0 &&
       <View style={{height:600,justifyContent :'center',alignItems:'center'}}>
         <TouchableOpacity onPress={()=> navigation.navigate('FoodHome')}>
-        <Text style={{fontSize:22,fontWeight:'700',textAlign:'center',color:'black',}}>Hungry ?</Text>
-        <Text style={{fontSize:14,color:'grey',marginVertical:10}}>You haven't added anything to your cart!</Text>
+        <Text style={{fontSize:22,fontWeight:'700',textAlign:'center',color:'black',}}>Alert !</Text>
+        <Text style={{fontSize:14,color:'grey',marginVertical:10}}>Your cart is empty!</Text>
         <TouchableOpacity 
         onPress={()=> navigation.navigate('FoodHome')}
         style={{backgroundColor:colors.primary,borderRadius:6,height:30,width:80,justifyContent:'center',alignItems:'center',alignSelf:'center'}}>

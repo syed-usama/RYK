@@ -1,5 +1,6 @@
 import {StyleSheet} from 'react-native';
-import colors from '../../assets/colors/colors';
+import { widthPercentageToDP } from 'react-native-responsive-screen';
+import colors from '../../../assets/colors/colors';
 export default StyleSheet.create({
     container: {
         flex: 1,
@@ -36,28 +37,33 @@ export default StyleSheet.create({
         fontWeight:'700',
         color:colors.secondary
       },
-row:{
-  marginTop:30,
-  flexDirection:'row',
-  justifyContent:'space-between',
-  alignItems:'center',
-},
-card:{
-  alignItems:'center',
-},
-circle:{
-  height:100,
-  width:100,
-  borderRadius:50,
-  backgroundColor:'white',
-  elevation:10,
-  justifyContent:'center',
-  alignItems:'center'
-},
-cardText:{
-  marginTop:10,
+      textbox:{
+        borderWidth:1,
+        borderRadius:5,
+        padding:10
+      },
+      button:{
+        marginTop:20,
+        alignItems:'center',
+        justifyContent:'center',
+        backgroundColor:colors.primary,
+        borderRadius:8,
+        height:40,
+        width:widthPercentageToDP(30),
+        alignSelf:'center',
+      },
+      buttonText:{
+        textAlign:'center',
+        fontSize: 16,
+        fontWeight:'700',
+        color:colors.white
+      },
+      error:{
+        marginTop:20,
+        textAlign:'center',
         fontSize: 15,
-        fontWeight:'600',
-        color:colors.secondary
-},
+        fontWeight:'400',
+        color:colors.primary
+      }
+
 });

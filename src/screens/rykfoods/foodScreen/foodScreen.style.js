@@ -1,5 +1,6 @@
 import {StyleSheet,Dimensions} from 'react-native';
 import colors from '../../../assets/colors/colors';
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 const {height} = Dimensions.get('screen');
 const height_logo = height * 0.22;
 const width_logo = height * 0.39;
@@ -36,8 +37,8 @@ export default StyleSheet.create({
         justifyContent: 'center',
       },
       favourite:{
-        height:140,
-        width: 105,
+        height:hp(20),
+        width: wp(37),
         marginHorizontal:5,
         marginVertical:5,
         alignItems: 'center',
@@ -57,8 +58,8 @@ export default StyleSheet.create({
         marginRight:10,
       },
       itemImage:{
-          width: 105,
-           height: 100,
+        height:hp(14),
+        width: wp(37),
             borderTopRightRadius: 15,
             borderTopLeftRadius:15,
     },

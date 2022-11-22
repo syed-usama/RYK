@@ -17,6 +17,10 @@ import HomeScreen from "../screens/homeScreen/homeScreen";
 import ComingSoon from "../screens/comingSoon/comingSoon";
 import FoodConfirmation from "../screens/rykfoods/FoodConfirmation/foodConfirmation";
 import FoodOrders from "../screens/rykfoods/foodOrders/foodOrders";
+import RateScreen from "../screens/courierScreen/rateScreen/rateScreen"
+import PickupScreen from "../screens/courierScreen/pickupScreen/pickupScreen";
+import TrackingScreen from "../screens/courierScreen/trackingScreen/trackingScreen";
+import FindusScreen from "../screens/courierScreen/findusScreen/findusScreen";
 
 
 const Stack = createStackNavigator();
@@ -36,8 +40,19 @@ const DrawerStackNavigator = () => {
        <Stack.Screen name="HomeScreen" component={HomeScreen} />
        <Stack.Screen name="FoodDrawer" component={FoodStackNavigator} />
        <Stack.Screen name="StoreDrawer" component={StoreStackNavigator} />
-       <Stack.Screen name="CourierDrawer" component={CourierDrawer} />
+       <Stack.Screen name="CourierDrawer" component={CourierStackNavigator} />
        <Stack.Screen name="ComingSoon" component={ComingSoon} />
+    </Stack.Navigator>
+  );
+}
+const CourierStackNavigator = () => {
+  return (
+    <Stack.Navigator screenOptions={{headerShown: false}}>
+       <Stack.Screen name="CourierHome" component={CourierDrawer} />
+       <Stack.Screen name="RateScreen" component={RateScreen} />
+       <Stack.Screen name="PickupScreen" component={PickupScreen} />
+       <Stack.Screen name="TrackingScreen" component={TrackingScreen} />
+       <Stack.Screen name="FindusScreen" component={FindusScreen} />
     </Stack.Navigator>
   );
 }
@@ -68,4 +83,4 @@ const StoreStackNavigator = () => {
   );
 }
 
-export { OnBoardStackNavigator,FoodStackNavigator,StoreStackNavigator,DrawerStackNavigator };
+export { OnBoardStackNavigator,FoodStackNavigator,StoreStackNavigator,DrawerStackNavigator,CourierStackNavigator };
