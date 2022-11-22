@@ -71,13 +71,13 @@ const FoodScreen = ({navigation}) => {
     getResturantsData(limit);
   };
   useEffect(() => {
-    console.log('products length:',food_products.length)
+    // console.log('products length:',food_products.length)
     if(products.length <= 0){
       onRefresh();
     }
   }, []);
   useEffect(() => {
-    console.log('data updated')
+    // console.log('data updated')
     setProducts(food_products)
     setResturants(food_shops)
   }, [food_products,food_shops]);

@@ -71,7 +71,7 @@ const StoreProduct = ({navigation, route}) => {
     }
   };
   useEffect(() => {
-    console.log('product:',product);
+    // console.log('product:',product);
     setCart(cartDetail.length);
   }, [isFocused]);
   return (
