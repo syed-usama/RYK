@@ -155,4 +155,26 @@ buttonText8:{
   color:'white',
   marginTop:-2,
 },
+button2:{
+  flexDirection:'row',
+  justifyContent:'space-between',
+  height:45,
+  width:wp(98),
+  alignSelf:'center',
+  alignItems:'center',
+  borderRadius: 8,
+  backgroundColor: colors.primary,
+},
+buttonText2:{
+  borderRadius:10,
+  borderWidth:1,
+  borderColor:'white',
+  height:20,
+  width:20,
+  textAlign:'center',
+  marginLeft:20,
+  fontSize: 14,
+  fontWeight:'500',
+  color:colors.white
+},
 });

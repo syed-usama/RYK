@@ -2,6 +2,7 @@ const initialState = {
   cart: [],
   storeCart: [],
   store_products:[],
+  store_categories:[],
   shops:[],
   food_products:[],
   food_shops:[],
@@ -27,6 +28,11 @@ const userReducer = (state = initialState, action) => {
       return {
         ...state,
         store_products: action.payload,
+      };
+      case 'Set_Categories':
+      return {
+        ...state,
+        store_categories: action.payload,
       };
       case 'Set_Food_Products':
       return {

@@ -3,7 +3,7 @@ import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-nativ
 import colors from '../../assets/colors/colors';
 export default StyleSheet.create({
     favourite1:{
-        height:200,
+        height:hp(23),
         width: wp(45),
         marginHorizontal:5,
         marginVertical:5,
@@ -13,8 +13,8 @@ export default StyleSheet.create({
         backgroundColor:'white'
       },
       itemImage1:{
+        height:hp(15),
           width: wp(45),
-           height: 150,
             borderTopRightRadius: 15,
             borderTopLeftRadius:15,
     },

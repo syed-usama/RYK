@@ -1,4 +1,5 @@
 import firestore from '@react-native-firebase/firestore';
+import storage from '@react-native-firebase/storage';
 
 export async function saveData(collection, doc, jsonObject) {
   await firestore()
@@ -288,4 +289,36 @@ export async function requestRemove(collection, doc, value) {
     .catch(function (error) {
       console.error('Error writing document: ', error);
     });
+}
+
+export async function uploadImage(uri, path) {
+  try {
+    console.log('====================================');
+    console.log(uri, path);
+    console.log('====================================');
+    const response = await fetch(uri);
+    const blob = await response.blob();
+    const ref = storage().ref(path);
+    const task = ref.put(blob);
+    return new Promise((resolve, reject) => {
+      task.on(
+        'state_changed',
+        taskSnapshot => {
+          console.log(
+            `${taskSnapshot.bytesTransferred} transferred out of ${taskSnapshot.totalBytes}`,
+          );
+        },
+        err => {
+          reject(err);
+        },
+        async () => {
+          const url = await task.snapshot.ref.getDownloadURL();
+          resolve(url);
+          return url;
+        },
+      );
+    });
+  } catch (err) {
+    console.log('uploadImage error: ' + err);
+  }
 }

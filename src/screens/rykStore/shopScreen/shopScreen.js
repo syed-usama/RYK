@@ -39,7 +39,7 @@ const ShopScreen = ({navigation,route}) => {
 
     setLoading(true)
 
-    let url = 'https://mallofryk.com/api/Items/Resfoodies/50/0/'+route.params.resturant.sho_id;
+    let url = 'https://mallofryk.com/api/Items/Resfoodies/500/0/'+route.params.resturant.sho_id;
 
     axios.get(url)
       .then(response => {

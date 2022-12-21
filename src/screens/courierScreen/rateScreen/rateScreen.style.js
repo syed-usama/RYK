@@ -46,14 +46,14 @@ export default StyleSheet.create({
       },
       table:{
         alignSelf:'center',
-        width:wp(90),
+        width:wp(95),
         flexDirection:'row',
         justifyContent:'space-between',
         borderWidth:1,
         borderColor:'black'
       },
       column:{
-        width:wp(30),
+        width:wp(13),
         borderWidth:1,
         borderColor:'black'
       },
@@ -63,13 +63,13 @@ export default StyleSheet.create({
       },
       tableHeader:{
         textAlign:'center',
-        fontSize: 16,
+        fontSize: 11.5,
         fontWeight:'700',
         color:colors.secondary
       },
       tableText:{
         textAlign:'center',
-        fontSize: 14,
+        fontSize: 10,
         fontWeight:'400',
         color:colors.secondary
       },

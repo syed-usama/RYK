@@ -5,7 +5,7 @@ export const showToast = (message) =>{
     Toast.show({
         description: message,
         duration: 2000,
-        backgroundColor:'red.800',
+        backgroundColor:'black',
         placement:'bottom'
       })
 }

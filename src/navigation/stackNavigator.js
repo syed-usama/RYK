@@ -21,6 +21,7 @@ import RateScreen from "../screens/courierScreen/rateScreen/rateScreen"
 import PickupScreen from "../screens/courierScreen/pickupScreen/pickupScreen";
 import TrackingScreen from "../screens/courierScreen/trackingScreen/trackingScreen";
 import FindusScreen from "../screens/courierScreen/findusScreen/findusScreen";
+import FilterProducts from "../screens/rykStore/filterProducts/filterProducts";
 
 
 const Stack = createStackNavigator();
@@ -79,6 +80,7 @@ const StoreStackNavigator = () => {
        <Stack.Screen name="StoreProduct" component={StoreProduct} />
        <Stack.Screen name="ShopScreen" component={ShopScreen} />
        <Stack.Screen name="Confirmation" component={Confirmation} />
+       <Stack.Screen name="FilterProducts" component={FilterProducts} />
     </Stack.Navigator>
   );
 }

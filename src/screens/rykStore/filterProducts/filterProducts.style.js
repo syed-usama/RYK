@@ -160,7 +160,6 @@ export default StyleSheet.create({
 cat_itemText:{
     fontFamily: Fonts.MontserratBold,
     fontSize:14,
-    color:colors.secondary,
 },
 
 });

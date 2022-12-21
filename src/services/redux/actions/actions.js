@@ -42,6 +42,24 @@ export const get_store_shops = (from,limit,feedback) => {
       });
   }
 }
+export const get_store_categories = (feedback) => {
+  return (dispatch) => {
+    let url = 'https://mallofryk.com/api/Categories/catList';
+    axios.get(url)
+      .then(response => {
+        let data = response.data;
+        if (data.length > 0) {
+          // console.log('categories',data)
+          feedback(true)
+          dispatch({ type: "Set_Categories", payload: data})
+        }
+      })
+      .catch(error => {
+        console.log('Error>>>', error);
+        feedback(false)
+      });
+  }
+}
 export const get_food_products = (feedback) => {
   return (dispatch) => {
     let url = 'https://mallofryk.com/api/Items/foodies/18/18';

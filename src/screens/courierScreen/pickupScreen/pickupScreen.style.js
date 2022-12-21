@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import { widthPercentageToDP } from 'react-native-responsive-screen';
+import { heightPercentageToDP, widthPercentageToDP } from 'react-native-responsive-screen';
 import colors from '../../../assets/colors/colors';
 export default StyleSheet.create({
   container: {
@@ -47,8 +47,34 @@ export default StyleSheet.create({
     borderBottomWidth:1,
     marginLeft:5,
   },
+  iconClose:{
+    position:'absolute',
+    alignSelf:'flex-end',
+    zIndex:99999,
+    right:-5,
+    top:-5,
+    backgroundColor:'white',
+    borderRadius:10
+  },
+  icon:{
+    borderWidth:1,
+    borderRadius:15,
+    padding:10,
+    margin:15
+  },
+  photoView:{
+    marginTop: 30,
+    alignSelf: 'center',
+    height: heightPercentageToDP(30),
+    width: widthPercentageToDP(60),
+  },
+  photo:{
+    margin: 0,
+    height: heightPercentageToDP(30),
+    width: widthPercentageToDP(60),
+  },
   button:{
-    marginTop:40,
+    marginTop:10,
     alignSelf:'center',
     borderRadius:8,
     backgroundColor:colors.primary,

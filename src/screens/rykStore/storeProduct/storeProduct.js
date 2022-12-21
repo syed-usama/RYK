@@ -98,7 +98,7 @@ const StoreProduct = ({navigation, route}) => {
         </TouchableOpacity>
       </View>
       <View style={styles.coverImage4}>
-        <ProductSwiper navigation={navigation} images={product.images} />
+        <ProductSwiper navigation={navigation} images={product.images ? product.images : [{url:product.url}]} />
       </View>
       <ScrollView style={styles.body} showsVerticalScrollIndicator={false}>
         <View style={styles.body1}>
@@ -123,7 +123,7 @@ const StoreProduct = ({navigation, route}) => {
           <Text style={styles.price}><Text style={[styles.price,{fontSize:16}]}>Rs. </Text>{product.pro_new_price}.00</Text>
           <View style={{flexDirection:'row',paddingHorizontal:13,paddingTop:10}}>
             <Entypo name="shop" size={20} color={colors.primary}/>
-            <Text style={styles.shop}>{product.sho_id}</Text>
+            <Text style={styles.shop}>{product.sho_name}</Text>
           </View>
           <View style={{flexDirection:'row',paddingHorizontal:10,paddingTop:10}}>
           <AirbnbRating
@@ -174,6 +174,15 @@ const StoreProduct = ({navigation, route}) => {
           <Text style={styles.buttonText}>ADD to Cart</Text>
         </TouchableOpacity>
       </View>
+      {cartDetail.length > 0 &&
+        <TouchableOpacity
+          style={styles.button2}
+          onPress={() =>  navigation.navigate('StoreCart')}>
+          <Text style={styles.buttonText2}>{cart}</Text>
+          <Text style={styles.buttonText}>View your cart</Text>
+          <Text></Text>
+        </TouchableOpacity>
+      }
     </SafeAreaView>
   );
 };

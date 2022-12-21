@@ -190,7 +190,7 @@ const ProductScreen = ({navigation, route}) => {
           <Text style={styles.price}>Rs. {selectedVar.price}.00</Text>
           <View style={{flexDirection:'row',paddingHorizontal:13,paddingTop:10}}>
             <Entypo name="shop" size={20} color={colors.primary}/>
-            <Text style={styles.shop}>{product.sho_id}</Text>
+            <Text style={styles.shop}>{product.sho_name}</Text>
           </View>
           
           <Text style={styles.description}>
@@ -266,6 +266,15 @@ const ProductScreen = ({navigation, route}) => {
           <Text style={styles.buttonText}>ADD to Cart</Text>
         </TouchableOpacity>
       </View>
+      {cartDetail.length > 0 &&
+        <TouchableOpacity
+          style={styles.button2}
+          onPress={() =>  navigation.navigate('CartScreen')}>
+          <Text style={styles.buttonText2}>{cart}</Text>
+          <Text style={styles.buttonText}>View your cart</Text>
+          <Text></Text>
+        </TouchableOpacity>
+      }
     </SafeAreaView>
   );
 };

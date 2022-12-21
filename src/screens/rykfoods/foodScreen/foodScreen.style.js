@@ -20,12 +20,18 @@ export default StyleSheet.create({
           height:40,
           marginHorizontal:10,
           flexDirection:'row',
+          justifyContent:'space-between',
           backgroundColor: 'rgba(0, 0, 0, 0.1)',
           paddingLeft:20,
           alignItems:'center'
       },
       searchText:{
           marginLeft:10,
+      },
+      searchInput:{
+        width:wp(70),
+        // backgroundColor:'yellow',
+        paddingLeft:3,
       },
       image: {
         width: width_logo,
@@ -37,7 +43,7 @@ export default StyleSheet.create({
         justifyContent: 'center',
       },
       favourite:{
-        height:hp(20),
+        height:hp(22),
         width: wp(37),
         marginHorizontal:5,
         marginVertical:5,

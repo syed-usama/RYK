@@ -92,7 +92,7 @@ const CheckoutScreen = ({navigation}) => {
           pro_id: item.pro_id,
           pro_qty: item.quantity,
           pro_price: item.pro_new_price,
-          pro_name: item.pro_name+item.variation.name,
+          pro_name: item.pro_name+' '+item.variation.name,
           pro_variation: item.variation,
           pro_instructions: item.instructions
         };
@@ -353,7 +353,7 @@ const CheckoutScreen = ({navigation}) => {
               <Text style={styles.cardText}>Cash</Text>
             </View>
             <Text style={[styles.totalText, {fontSize: 16}]}>
-              Rs. {total + 200}.00
+              Rs. {total >=200 ? + total+10 : total + 50}.00
             </Text>
           </View>
         </View>
@@ -419,16 +419,16 @@ const CheckoutScreen = ({navigation}) => {
               </View>
               <View style={styles.row1}>
                 <Text style={styles.title}>Delivery fee</Text>
-                <Text style={styles.price}>Rs. 100.00</Text>
+                <Text style={styles.price}>Rs. {total >=200 ? + 0 : 40}.00</Text>
               </View>
               <View style={styles.row1}>
                 <Text style={styles.title}>Platform fee</Text>
                 <Text style={styles.price}>Rs. 10.00</Text>
               </View>
-              <View style={styles.row1}>
+              {/* <View style={styles.row1}>
                 <Text style={styles.title}>VAT</Text>
                 <Text style={styles.price}>Rs. 90.00</Text>
-              </View>
+              </View> */}
             </View>
           )}
         </View>
@@ -442,7 +442,7 @@ const CheckoutScreen = ({navigation}) => {
                 {' (incl. VAT)'}
               </Text>
             </Text>
-            <Text style={styles.totalText}>Rs. {total + 200}.00</Text>
+            <Text style={styles.totalText}>Rs. {total >=200 ? + total+10 : total + 50}.00</Text>
           </View>
           <TouchableOpacity
             disabled={loading}

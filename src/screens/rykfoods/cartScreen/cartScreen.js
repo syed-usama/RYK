@@ -195,7 +195,7 @@ const CartScreen = ({navigation}) => {
             </View>
             <View style={styles.totalRow}>
               <Text style={styles.totalText1}>Delivery fee</Text>
-              <Text style={styles.totalText1}>Rs. 100.00</Text>
+              <Text style={styles.totalText1}>Rs. {total >=200 ? + 0 : 40}.00</Text>
             </View>
           </View>
         )}
@@ -209,13 +209,13 @@ const CartScreen = ({navigation}) => {
                 {' (incl. VAT)'}
               </Text>
             </Text>
-            <Text style={styles.totalText}>Rs. {total + 100}.00</Text>
+            <Text style={styles.totalText}>Rs. {total >200 ? + total : total + 40}.00</Text>
           </View>
           <TouchableOpacity
             onPress={() => {
               if(total > 2800 ){
                 showToast('Your order is exeeding max limit kindly remove some items')
-              }else if(total < 250){
+              }else if(total < 150){
                 showToast('Your order is is less than minimum limit kindly add some items')
               }else{
                 navigation.navigate('CheckoutScreen');
