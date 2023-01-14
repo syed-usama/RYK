@@ -116,7 +116,8 @@ const CheckoutScreen = ({navigation}) => {
           res_name: resturant[0].res_name,
           res_address: resturant[0].res_location,
           rider_id: '0',
-          order_amount: total + 200,
+          order_amount: total,
+          order_fee: total >=200 ?  10 :  50,
           user_name: userName,
           user_email: user.email,
           user_phone: userPhone,
@@ -267,8 +268,8 @@ const CheckoutScreen = ({navigation}) => {
             latitudeDelta: 0.003,
             longitudeDelta: 0.003, 
           }}
-          zoomEnabled={true}
-          scrollEnabled={true}
+          zoomEnabled={false}
+          scrollEnabled={false}
           showsUserLocation={true}
           followUserLocation={true}
                   loadingEnabled
@@ -442,7 +443,7 @@ const CheckoutScreen = ({navigation}) => {
                 {' (incl. VAT)'}
               </Text>
             </Text>
-            <Text style={styles.totalText}>Rs. {total >=200 ? + total+10 : total + 50}.00</Text>
+            <Text style={styles.totalText}>Rs. {total >=200 ?  total+10 : total + 50}.00</Text>
           </View>
           <TouchableOpacity
             disabled={loading}

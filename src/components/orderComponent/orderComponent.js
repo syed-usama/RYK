@@ -24,22 +24,6 @@ const OrderComponent = ({orders}) => {
     'November',
     'December',
   ];
-  const confirmAlert = order => {
-    Alert.alert('Are you sure', 'Is order is handed over the rider ?', [
-      {
-        text: 'No',
-        onPress: () => console.log('Cancel Pressed'),
-        style: 'cancel',
-      },
-      {
-        text: 'Yes',
-        onPress: () => {
-          setLoader(true);
-          accept(order);
-        },
-      },
-    ]);
-  };
   const renderDate = mdate => {
     // console.log('mdate',mdate)
     var date = new Date(mdate.seconds * 1000);
@@ -91,14 +75,20 @@ const OrderComponent = ({orders}) => {
         var res = 'Delivered';
         break;
       case 6:
-        var res = 'Waiting for resturant to accept';
+        var res = 'Order tracking failed';
+        break;
+      case 7:
+        var res = 'Order tracking failed';
+        break;
+      case 8:
+        var res = 'Cancelled by Rykfoods';
         break;
       case 9:
         var res = 'Cancelled by Resturant';
         break;
-
       default:
-      // code block
+        var res = 'Cancelled';
+        break;
     }
     return res;
   };
@@ -124,6 +114,23 @@ const OrderComponent = ({orders}) => {
           {orders.order_amount}.00
         </Text>
       </Text>
+      {orders.rider_id != '0' &&
+      <Text style={[styles.text2, {fontSize: 14, marginTop: 0}]}>
+        Rider Name :
+        <Text style={[styles.text3, {fontSize: 12, color: 'black'}]}>
+          {' '}
+          {orders.rider_name}
+        </Text>
+      </Text>}
+      {orders.rider_id != '0' &&
+      <Text style={[styles.text2, {fontSize: 14, marginTop: 0}]}>
+        Rider Phone :
+        <Text style={[styles.text3, {fontSize: 12, color: 'black'}]}>
+          {' '}
+          {orders.rider_phone}
+        </Text>
+      </Text>
+        }
       <Text style={[styles.text2, {fontSize: 14, marginTop: 10}]}>
         Status :
         <Text style={[styles.text3, {fontSize: 12, color: 'black'}]}>

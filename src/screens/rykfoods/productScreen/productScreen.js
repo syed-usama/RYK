@@ -228,6 +228,7 @@ const ProductScreen = ({navigation, route}) => {
           </Text>
           <TextInput
             style={styles.textInput}
+            placeholderTextColor={'black'}
             value={instructions}
             onChangeText={(value)=> setInstructions(value)}
             placeholder="e.g. no mayo"

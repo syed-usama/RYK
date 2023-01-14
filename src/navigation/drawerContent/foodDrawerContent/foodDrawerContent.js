@@ -71,7 +71,7 @@ export function FoodDrawerContent(props) {
                                 label="Orders"
                                 onPress={() => {props.navigation.navigate('FoodOrders')}}
                             />
-                            <DrawerItem 
+                            {/* <DrawerItem 
                                 icon={({color, size}) => (
                                     <Iconn 
                                     name="settings-sharp" 
@@ -81,7 +81,7 @@ export function FoodDrawerContent(props) {
                                 )}
                                 label="Settings"
                                 onPress={() => {props.navigation.navigate('ComingSoon')}}
-                            />
+                            /> */}
                             <DrawerItem 
                                 icon={({color, size}) => (
                                     <Icon 
@@ -91,7 +91,7 @@ export function FoodDrawerContent(props) {
                                     />
                                 )}
                                 label="Support"
-                                onPress={() => {props.navigation.navigate('ComingSoon')}}
+                                onPress={() => {props.navigation.navigate('FoodSupport')}}
                             />
                         </Drawer.Section>
                         </DrawerContentScrollView>

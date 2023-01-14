@@ -90,7 +90,7 @@ cardText:{
       textInput:{
         marginHorizontal:0,
         marginVertical:5,
-        height:45,
+        height:48,
         backgroundColor: '#fff',
       },
 title:{

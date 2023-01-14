@@ -100,8 +100,11 @@ export default StyleSheet.create({
           flexDirection:'row',
           justifyContent:'space-between'
       },
+      content:{
+        width:wp(65)
+      },
 imageView:{
-    width:100,
+    width:wp(30),
 },
 image:{
     height:70,

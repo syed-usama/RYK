@@ -22,6 +22,8 @@ import PickupScreen from "../screens/courierScreen/pickupScreen/pickupScreen";
 import TrackingScreen from "../screens/courierScreen/trackingScreen/trackingScreen";
 import FindusScreen from "../screens/courierScreen/findusScreen/findusScreen";
 import FilterProducts from "../screens/rykStore/filterProducts/filterProducts";
+import FoodSupport from "../screens/rykfoods/foodSupport/foodSupport";
+import StoreSupport from "../screens/rykStore/storeSupport/storeSupport";
 
 
 const Stack = createStackNavigator();
@@ -32,6 +34,7 @@ const OnBoardStackNavigator = () => {
           <Stack.Screen name={'SplashScreen'} component={SplashScreen} />
           <Stack.Screen name={'LoginScreen'} component={LoginScreen} />
           <Stack.Screen name={'SignupScreen'} component={SignupScreen} />
+          <Stack.Screen name={'ForgetPassword'} component={StoreSupport} />
     </Stack.Navigator>
   );
 }
@@ -67,6 +70,7 @@ const FoodStackNavigator = () => {
        <Stack.Screen name="ResturantScreen" component={ResturantScreen} />
        <Stack.Screen name="FoodConfirmation" component={FoodConfirmation} />
        <Stack.Screen name="FoodOrders" component={FoodOrders} />
+       <Stack.Screen name="FoodSupport" component={FoodSupport} />
     </Stack.Navigator>
   );
 }
@@ -81,6 +85,7 @@ const StoreStackNavigator = () => {
        <Stack.Screen name="ShopScreen" component={ShopScreen} />
        <Stack.Screen name="Confirmation" component={Confirmation} />
        <Stack.Screen name="FilterProducts" component={FilterProducts} />
+       <Stack.Screen name="StoreSupport" component={StoreSupport} />
     </Stack.Navigator>
   );
 }

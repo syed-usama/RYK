@@ -80,11 +80,15 @@ const StoreCheckout = ({navigation}) => {
       dispatch(addtoStore(emptyArray))
       setLoading(false);
       navigation.navigate('Confirmation')
+    }else{
+      setLoading(false)
     }
   }).catch((e) => {
+    setLoading(false)
       console.log('Place Order Error>>', e)
   })
         }else{
+          setLoading(false);
           showToast("Required Fields can't be empty")
         }
   
@@ -260,7 +264,7 @@ const StoreCheckout = ({navigation}) => {
                     Cash
                 </Text>
             </View>
-            <Text style={[styles.totalText,{fontSize:16}]}>Rs. {total+200}.00</Text>
+            <Text style={[styles.totalText,{fontSize:16}]}>Rs. {total>= 2500 ? total : total+250}.00</Text>
             </View>
         </View>
         <View style={[styles.card,{marginBottom:40}]}>
@@ -305,15 +309,7 @@ const StoreCheckout = ({navigation}) => {
               Delivery fee 
             </Text>
             <Text style={styles.price}>
-              Rs. 70.00
-            </Text>
-          </View>
-          <View style= {styles.row1}>
-            <Text style={styles.title}>
-              VAT 
-            </Text>
-            <Text style={styles.price}>
-              Rs. 130.00
+              Rs. {total>= 2500 ? 0 : 250}.00
             </Text>
           </View>
         </View>
@@ -330,7 +326,7 @@ const StoreCheckout = ({navigation}) => {
               </Text>
             </Text>
             <Text style={styles.totalText}>
-              Rs. {total+200}.00
+              Rs. {total>= 2500 ? total :total+250}.00
             </Text>
           </View>
         <TouchableOpacity 

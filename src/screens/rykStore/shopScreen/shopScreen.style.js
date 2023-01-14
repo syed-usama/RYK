@@ -51,7 +51,6 @@ export default StyleSheet.create({
     flexDirection:'row',
     justifyContent:'space-between',
     paddingHorizontal:15,
-    alignItems:'center',
     backgroundColor:'white'
   },
   ratingText:{
@@ -61,7 +60,7 @@ export default StyleSheet.create({
     color:colors.black,
   },
   deliveryText:{
-    marginLeft:5,
+    marginLeft:8,
     textAlignVertical:'center',
     fontSize: 14,
     color:colors.black,
@@ -100,14 +99,16 @@ export default StyleSheet.create({
           flexDirection:'row',
           justifyContent:'space-between'
       },
+      content:{
+        width:wp(65)
+      },
 imageView:{
-    width:100,
+    width:wp(30),
 },
 image:{
     height:70,
     width:90,
     borderRadius:5,
-    resizeMode: 'stretch'
 },
 itemDetail:{
     justifyContent:'center',

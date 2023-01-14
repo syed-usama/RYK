@@ -7,19 +7,19 @@ const HomeSwiper = ({navigation}) => {
   return (
     <Swiper style={styles.swiper} dotColor={colors.white} activeDotColor={colors.primary} autoplay={true}>
       <View style={styles.slide}>
-        <Image style={styles.sliderImage} source={require('../../assets/images/slider_images/slide1.jpeg')}/>
+        <Image style={styles.sliderImage} source={require('../../assets/images/slider_images/slider1.jpeg')}/>
       </View>
       <View style={styles.slide}>
-        <Image style={styles.sliderImage} source={require('../../assets/images/slider_images/slide2.jpeg')}/>
+        <Image style={styles.sliderImage} source={require('../../assets/images/slider_images/slider7.jpeg')}/>
       </View>
       <View style={styles.slide}>
-        <Image style={styles.sliderImage} source={require('../../assets/images/slider_images/slide5.jpg')}/>
+        <Image style={styles.sliderImage} source={require('../../assets/images/slider_images/slider2.jpeg')}/>
       </View>
       <View style={styles.slide}>
-        <Image style={styles.sliderImage} source={require('../../assets/images/slider_images/slide3.jpeg')}/>
+        <Image style={styles.sliderImage} source={require('../../assets/images/slider_images/slider3.jpeg')}/>
       </View>
       <View style={styles.slide}>
-        <Image style={styles.sliderImage} source={require('../../assets/images/slider_images/slide4.jpeg')}/>
+        <Image style={styles.sliderImage} source={require('../../assets/images/slider_images/slider4.jpeg')}/>
       </View>
     </Swiper>
   );

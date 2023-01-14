@@ -1,5 +1,6 @@
 import {StyleSheet} from 'react-native';
 import colors from '../../assets/colors/colors';
+import { heightPercentageToDP } from 'react-native-responsive-screen';
 export default StyleSheet.create({
     container: {
         flex: 1,
@@ -42,6 +43,7 @@ export default StyleSheet.create({
     },
       body:{
           flex:4.5,
+          // height:heightPercentageToDP(30),
           alignItems:'center'
       },
       button1:{

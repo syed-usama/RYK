@@ -60,7 +60,7 @@ export function StoreDrawerContent(props) {
                                 label="Profile"
                                 onPress={() => {props.navigation.navigate('ComingSoon')}}
                             />
-                            <DrawerItem 
+                            {/* <DrawerItem 
                                 icon={({color, size}) => (
                                     <Iconn 
                                     name="settings-sharp" 
@@ -70,7 +70,7 @@ export function StoreDrawerContent(props) {
                                 )}
                                 label="Settings"
                                 onPress={() => {props.navigation.navigate('ComingSoon')}}
-                            />
+                            /> */}
                             <DrawerItem 
                                 icon={({color, size}) => (
                                     <Icon 
@@ -80,7 +80,7 @@ export function StoreDrawerContent(props) {
                                     />
                                 )}
                                 label="Support"
-                                onPress={() => {props.navigation.navigate('ComingSoon')}}
+                                onPress={() => {props.navigation.navigate('StoreSupport')}}
                             />
                         </Drawer.Section>
                         </DrawerContentScrollView>

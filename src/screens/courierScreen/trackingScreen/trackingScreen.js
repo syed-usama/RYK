@@ -25,8 +25,13 @@ const TrackingScreen = ({navigation}) => {
       .then(response => {
         // console.log('response:>>',response)
         setLoading(false);
-        let data = response.data;
+        let data = response.data.Result;
         console.log('data:',data)
+        if(data.CurrentTrackStatus.length > 0){
+          setTrackingDetail(data.CurrentTrackStatus[0])
+        }else{
+          setError(true);
+        }
       })
       .catch(error => {
         console.log('Error>>>', error);
@@ -58,6 +63,7 @@ const TrackingScreen = ({navigation}) => {
         <Text style={styles.bodyText1}>What would you like to track?</Text>
         <TextInput
         placeholder='Enter your tracking number'
+        placeholderTextColor={'black'}
         value={trackingNo}
         onChangeText={(value)=> setTrackingNo(value)}
         style={styles.textbox}
@@ -71,10 +77,132 @@ const TrackingScreen = ({navigation}) => {
           </Text>
           }
         </TouchableOpacity>
-        {error  &&
+        {error  ?
         <Text style={styles.error}>
           No record found !
         </Text>
+        :
+        trackingDetail ?
+        <View style={styles.card}>
+
+          <View style={styles.row}>
+            <View style={styles.text1}>
+              <Text style={styles.tabletext}>
+                Consignment No:
+              </Text>
+            </View>
+            <View style={styles.text2}>
+              <Text style={styles.tabletext2}>
+                {trackingDetail.track_no}
+              </Text>
+            </View>
+          </View>
+
+          <View style={styles.row}>
+            <View style={styles.text1}>
+              <Text style={styles.tabletext}>
+                Delivery Status:
+              </Text>
+            </View>
+            <View style={styles.text2}>
+              <Text style={[styles.tabletext2,{fontWeight:'600',fontSize:14}]}>
+              {trackingDetail.status_name}
+              </Text>
+            </View>
+          </View>
+
+          <View style={styles.row}>
+            <View style={styles.text1}>
+              <Text style={styles.tabletext}>
+                Booking Date:
+              </Text>
+            </View>
+            <View style={styles.text2}>
+              <Text style={styles.tabletext2}>
+              {trackingDetail.booking_date_time}
+              </Text>
+            </View>
+          </View>
+
+          <View style={styles.row}>
+            <View style={styles.text1}>
+              <Text style={styles.tabletext}>
+                Sender Name:
+              </Text>
+            </View>
+            <View style={styles.text2}>
+              <Text style={styles.tabletext2}>
+              {trackingDetail.sender_name}
+              </Text>
+            </View>
+          </View>
+
+          <View style={styles.row}>
+            <View style={styles.text1}>
+              <Text style={styles.tabletext}>
+                Receiver Name:
+              </Text>
+            </View>
+            <View style={styles.text2}>
+              <Text style={styles.tabletext2}>
+              {trackingDetail.receiver_name}
+              </Text>
+            </View>
+          </View>
+
+          <View style={styles.row}>
+            <View style={styles.text1}>
+              <Text style={styles.tabletext}>
+                Origin:
+              </Text>
+            </View>
+            <View style={styles.text2}>
+              <Text style={styles.tabletext2}>
+              {trackingDetail.source_terminal}
+              </Text>
+            </View>
+          </View>
+
+          <View style={styles.row}>
+            <View style={styles.text1}>
+              <Text style={styles.tabletext}>
+                Destination:
+              </Text>
+            </View>
+            <View style={styles.text2}>
+              <Text style={styles.tabletext2}>
+              {trackingDetail.destination_terminal} 
+              </Text>
+            </View>
+          </View>
+
+          <View style={styles.row}>
+            <View style={styles.text1}>
+              <Text style={styles.tabletext}>
+                Delivery Type:
+              </Text>
+            </View>
+            <View style={styles.text2}>
+              <Text style={styles.tabletext2}>
+              {trackingDetail.payment_mode_name}
+              </Text>
+            </View>
+          </View>
+
+          <View style={styles.row}>
+            <View style={styles.text1}>
+              <Text style={styles.tabletext}>
+                Weight:
+              </Text>
+            </View>
+            <View style={styles.text2}>
+              <Text style={styles.tabletext2}>
+              {trackingDetail.tweight}
+              </Text>
+            </View>
+          </View>
+
+        </View>:null
 }
       </View>
 

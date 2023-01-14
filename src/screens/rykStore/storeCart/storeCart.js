@@ -26,7 +26,7 @@ const StoreCart = ({navigation}) => {
       return product;
     });
     setProducts(filtered);
-    checkTotal();
+    checkTotal(filtered);
   }
   };
   const remove = (pro_id) =>{
@@ -36,13 +36,13 @@ const StoreCart = ({navigation}) => {
       }
     });
     setProducts(filtered);
-    checkTotal();
+    checkTotal(filtered);
     dispatch(addtoStore(filtered));
   }
-  const checkTotal = () => {
-    if (products){
+  const checkTotal = (_products) => {
+    if (_products){
     var total = 0;
-    const filterd = products.filter(item => {
+    const filterd = _products.filter(item => {
       let price = parseInt(item.pro_new_price) * parseInt(item.quantity);
       total = parseInt(total) + price;
     });
@@ -52,7 +52,7 @@ const StoreCart = ({navigation}) => {
     }
   }
   useEffect(()=>{
-    checkTotal();
+    checkTotal(products);
   },[isFocused])
   return (
     <SafeAreaView style={styles.container}>
@@ -91,11 +91,11 @@ const StoreCart = ({navigation}) => {
       <ScrollView>
       {products.length == 0 &&
       <View style={{height:600,justifyContent :'center',alignItems:'center'}}>
-        <TouchableOpacity onPress={()=> navigation.navigate('FoodHome')}>
+        <TouchableOpacity onPress={()=> navigation.navigate('StoreHome')}>
         <Text style={{fontSize:22,fontWeight:'700',textAlign:'center',color:'black',}}>Alert !</Text>
         <Text style={{fontSize:14,color:'grey',marginVertical:10}}>Your cart is empty!</Text>
         <TouchableOpacity 
-        onPress={()=> navigation.navigate('FoodHome')}
+        onPress={()=> navigation.navigate('StoreHome')}
         style={{backgroundColor:colors.primary,borderRadius:6,height:30,width:80,justifyContent:'center',alignItems:'center',alignSelf:'center'}}>
           <Text style={{color:'white',fontWeight:'600',fontSize:12}}>Browse</Text>
         </TouchableOpacity>
@@ -136,7 +136,7 @@ const StoreCart = ({navigation}) => {
               Delivery fee 
             </Text>
             <Text style={styles.totalText1}>
-              Rs. 70.00
+              Rs. {total>= 2500 ? 0 : 250}.00
             </Text>
           </View>
         </View>
@@ -152,7 +152,7 @@ const StoreCart = ({navigation}) => {
               </Text>
             </Text>
             <Text style={styles.totalText}>
-              Rs. {total+70}.00
+              Rs. {total>= 2500 ? total : total+250}.00
             </Text>
           </View>
         <TouchableOpacity onPress={()=> navigation.navigate('StoreCheckout')}

@@ -66,7 +66,7 @@ const StoreScreen = ({navigation}) => {
   const getFoodData = async new_limit => {
     console.log('get food products')
     setRefreshing(false);
-    dispatch(get_store_products(1, new_limit, feedback));
+    dispatch(get_store_products(0, new_limit, feedback));
   };
   const getCategories = async () => {
     console.log('get categories')
@@ -80,7 +80,7 @@ const StoreScreen = ({navigation}) => {
   const getResturantsData = async rlimit => {
     console.log('get resturants')
     setRestLoader(true);
-    dispatch(get_store_shops(1, rlimit, feedback));
+    dispatch(get_store_shops(0, rlimit, feedback));
   };
   const isCloseToBottom = ({layoutMeasurement, contentOffset, contentSize}) => {
     const paddingToBottom = 20;

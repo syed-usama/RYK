@@ -244,7 +244,7 @@ const ResturantScreen = ({navigation,route}) => {
           renderItem={({ item }) => (
             <View style={styles.itemContainer}>
               <TouchableOpacity style={styles.itemSection} onPress={()=> navigation.navigate('ProductScreen', {product: item})}>
-          <View>
+          <View style={styles.content}>
             <Text style={styles.title}>{item.pro_name}</Text>
             <Text style={styles.Price}>
               {item.variations.length>0 ? item.variations[0].price != '' ? 'Rs. '+item.variations[0].price+ '/-' : 'yet to update' : 'yet to update'}
@@ -253,6 +253,7 @@ const ResturantScreen = ({navigation,route}) => {
           <View style={styles.imageView}>
           <FastImage
               style={styles.image}
+              resizeMode='cover'
               source={{uri: imageUrl+item.images[0].url}}
             />
           </View>

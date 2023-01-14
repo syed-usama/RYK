@@ -145,6 +145,7 @@ const StoreProduct = ({navigation, route}) => {
           </Text>
           <TextInput
             style={styles.textInput}
+            placeholderTextColor={'black'}
             placeholder="Write here.."
             numberOfLines={3}
           />

@@ -29,6 +29,8 @@ const PickupScreen = ({navigation}) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
+  const [receiverName, setRName] = useState('');
+  const [receiverPhone, setRPhone] = useState('');
   const [pickup, setPickup] = useState('');
   const [destination, setDestination] = useState('');
   const [comments, setComments] = useState('');
@@ -75,9 +77,13 @@ const PickupScreen = ({navigation}) => {
     var checkpieces = pieces.replace(/\s+/g, '');
     var checkweight = weight.replace(/\s+/g, '');
     var checkimage = imageurl.replace(/\s+/g, '');
+    var checkrName = receiverName.replace(/\s+/g, '');
+    var checkrPhone = receiverPhone.replace(/\s+/g, '');
     if (
       checkname != '' &&
       checkpickup != '' &&
+      checkrName != '' &&
+      checkrPhone != '' &&
       checkphone != '' &&
       checkdestination != '' &&
       checkpieces != '' &&
@@ -101,6 +107,8 @@ const PickupScreen = ({navigation}) => {
         pieces: pieces,
         weight: weight,
         shipmentValue: shipvalue,
+        rName: receiverName,
+        rPhone: receiverPhone,
         image: url,
       };
       let yes = await saveData('pickupRequests', pid, dataa);
@@ -168,6 +176,23 @@ const PickupScreen = ({navigation}) => {
           placeholder="Enter your pickup address"
           style={styles.textInput}
         />
+
+        <Text style={styles.title}>Receiver name</Text>
+        <TextInput
+          value={receiverName}
+          onChangeText={value => setRName(value)}
+          placeholder="Enter receiver name"
+          style={styles.textInput}
+        />
+
+        <Text style={styles.title}>Receiver Mobile Number</Text>
+        <TextInput
+          value={receiverPhone}
+          onChangeText={value => setRPhone(value)}
+          placeholder="Enter receiver mobile number"
+          style={styles.textInput}
+        />
+
         <Text style={styles.title}>Enter destination address</Text>
         <TextInput
           value={destination}
@@ -196,13 +221,13 @@ const PickupScreen = ({navigation}) => {
           placeholder="Enter total weight of pickup"
           style={styles.textInput}
         />
-        <Text style={styles.title}>Shipment value (optional)</Text>
+        {/* <Text style={styles.title}>Shipment value (optional)</Text>
         <TextInput
           value={shipvalue}
           onChangeText={value => setShipvalue(value)}
           placeholder="Enter shipment value"
           style={styles.textInput}
-        />
+        /> */}
         <Text style={styles.title}>Upload image of shipment</Text>
         <View style={{flexDirection: 'row'}}>
           {imageurl ? (

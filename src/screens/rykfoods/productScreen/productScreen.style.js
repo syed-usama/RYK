@@ -152,6 +152,7 @@ instructionDescription:{
         marginHorizontal:15,
 },
 textInput:{
+  color:'black',
   marginTop:5,
   borderWidth:1,
   borderColor:'grey',
